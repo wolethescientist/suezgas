@@ -1,0 +1,453 @@
+/* Same type system as SuezElectric — one group, one voice. Zodiak display, Switzer body. */
+@import url("https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700,800&f[]=switzer@400,500,600,700&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* ---- Suez Gas is BONE-dominant. SuezElectric is ink-dominant. Same palette,
+       inverted emphasis — that's what tells the two sites apart at a glance. ---- */
+  --color-bone: #f2ede4;
+  --color-bone-2: #e8e1d5;
+  --color-bone-3: #ddd4c4;
+  --color-bone-line: #cbc1ae;
+
+  --color-ink: #111316;
+  --color-ink-2: #191c20;
+  --color-ink-line: #2b3037;
+
+  /* Sampled from the Suez Gas logo artwork. */
+  --color-flame: #f58220; /* on ink — 7.4:1. Never on bone. */
+  --color-flame-lit: #f8a35c; /* the meniscus highlight on the cylinder fill */
+  --color-flame-ink: #8a4408; /* the bone-safe shade of the same orange — 6.6:1 on bone */
+  /* A gas flame burns blue at the base. Used sparingly, for gauges and data only. */
+  --color-burn: #1c5c8c; /* 5.8:1 on bone */
+  --color-burn-lit: #63b3e8; /* 6.9:1 on ink */
+
+  --color-fg-bone: #14161a;
+  --color-fg-bone-muted: #54555a; /* 6.1:1 on bone */
+  --color-fg-ink: #f2efe9;
+  --color-fg-ink-muted: #9b9892; /* 6.4:1 on ink */
+
+  --font-display: "Zodiak", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --font-label: "Switzer", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  --text-display-xl: clamp(3rem, 8.6vw, 8.25rem);
+  --text-display-l: clamp(2.375rem, 5.4vw, 4.75rem);
+  --text-display-m: clamp(1.75rem, 3.2vw, 2.875rem);
+  --text-display-s: clamp(1.375rem, 2.1vw, 1.75rem);
+  --text-body-l: 1.1875rem;
+  --text-body: 1.0625rem;
+
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-bone-line);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background: var(--color-bone);
+    color: var(--color-fg-bone);
+    font-family: var(--font-sans);
+    font-size: var(--text-body);
+    line-height: 1.65;
+    font-feature-settings: "ss01", "cv01";
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection {
+    background: var(--color-flame);
+    color: var(--color-ink);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-flame-ink);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+    font-weight: 500;
+    line-height: 0.94;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+}
+
+@layer components {
+  .measure {
+    width: 100%;
+    max-width: 88rem;
+    margin-inline: auto;
+    padding-inline: clamp(1.25rem, 5vw, 5.5rem);
+  }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.7rem;
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-flame-ink);
+  }
+  .eyebrow::before {
+    content: "";
+    width: 1.75rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.7;
+  }
+  .on-ink .eyebrow {
+    color: var(--color-flame);
+  }
+
+  /* Hairline rule with tick marks — reads as a gauge scale, not a border */
+  .rule-ticks {
+    position: relative;
+    height: 1px;
+    background: var(--color-bone-line);
+  }
+  .rule-ticks::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    height: 7px;
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--color-bone-line) 0 1px,
+      transparent 1px 5rem
+    );
+  }
+  .on-ink .rule-ticks {
+    background-color: var(--color-ink-line);
+  }
+  .on-ink .rule-ticks::after {
+    background-image: repeating-linear-gradient(
+      to right,
+      var(--color-ink-line) 0 1px,
+      transparent 1px 5rem
+    );
+  }
+
+  /* ---------- Buttons ---------- */
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.6rem;
+    min-height: 3rem;
+    padding: 0 1.75rem;
+    border-radius: 9999px;
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.8125rem;
+    letter-spacing: 0.055em;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition:
+      background-color 200ms var(--ease-out-expo),
+      color 200ms var(--ease-out-expo),
+      border-color 200ms var(--ease-out-expo),
+      box-shadow 260ms var(--ease-out-expo);
+  }
+
+  .btn-flame {
+    background: var(--color-flame);
+    color: var(--color-ink);
+    border: 1px solid var(--color-flame);
+  }
+  .btn-flame:hover {
+    background: #f89a4b;
+    border-color: #f89a4b;
+    box-shadow: 0 14px 40px -18px rgb(245 130 32 / 0.7);
+  }
+
+  .btn-ghost {
+    background: transparent;
+    color: var(--color-fg-bone);
+    border: 1px solid var(--color-bone-line);
+  }
+  .btn-ghost:hover {
+    background: var(--color-bone-2);
+    border-color: var(--color-fg-bone-muted);
+  }
+  .on-ink .btn-ghost {
+    color: var(--color-fg-ink);
+    border-color: var(--color-ink-line);
+  }
+  .on-ink .btn-ghost:hover {
+    background: var(--color-ink-2);
+    border-color: var(--color-fg-ink-muted);
+  }
+
+  /* ---------- Ink (dark) sections — the accent, not the default ---------- */
+  .on-ink {
+    background: var(--color-ink);
+    color: var(--color-fg-ink);
+  }
+  .on-ink * {
+    border-color: var(--color-ink-line);
+  }
+
+  .link-slide {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 2px;
+  }
+  .link-slide::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 1px;
+    width: 100%;
+    background: currentColor;
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 340ms var(--ease-out-expo);
+  }
+  .link-slide:hover::after {
+    transform: scaleX(1);
+  }
+
+  /* ---------- FAQ / safety accordions: native <details> ---------- */
+  .faq-item {
+    border-top: 1px solid var(--color-bone-line);
+  }
+  .faq-item:last-of-type {
+    border-bottom: 1px solid var(--color-bone-line);
+  }
+  .faq-item > summary {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 2rem;
+    padding: 1.5rem 0;
+    cursor: pointer;
+    list-style: none;
+    font-family: var(--font-display);
+    font-size: clamp(1.125rem, 1.9vw, 1.4rem);
+    line-height: 1.25;
+    transition: color 200ms var(--ease-out-expo);
+  }
+  .faq-item > summary::-webkit-details-marker {
+    display: none;
+  }
+  .faq-item > summary:hover {
+    color: var(--color-flame-ink);
+  }
+  .faq-sign {
+    position: relative;
+    flex: none;
+    width: 0.875rem;
+    height: 0.875rem;
+  }
+  .faq-sign::before,
+  .faq-sign::after {
+    content: "";
+    position: absolute;
+    inset: 50% 0 auto 0;
+    height: 1px;
+    background: currentColor;
+    transition: transform 320ms var(--ease-out-expo);
+  }
+  .faq-sign::after {
+    transform: rotate(90deg);
+  }
+  .faq-item[open] .faq-sign::after {
+    transform: rotate(0deg);
+  }
+  .faq-body {
+    padding-bottom: 1.75rem;
+    max-width: 46rem;
+    color: var(--color-fg-bone-muted);
+  }
+  @supports selector(::details-content) {
+    .faq-item {
+      interpolate-size: allow-keywords;
+    }
+    .faq-item::details-content {
+      block-size: 0;
+      overflow: clip;
+      opacity: 0;
+      transition:
+        block-size 420ms var(--ease-out-expo),
+        content-visibility 420ms allow-discrete,
+        opacity 300ms var(--ease-out-expo);
+    }
+    .faq-item[open]::details-content {
+      block-size: auto;
+      opacity: 1;
+    }
+  }
+
+  /* ---------- Forms ---------- */
+  .field > label,
+  .field-label {
+    display: block;
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.75rem;
+    letter-spacing: 0.09em;
+    text-transform: uppercase;
+    color: var(--color-fg-bone-muted);
+  }
+  .field > input,
+  .field > select,
+  .field > textarea {
+    width: 100%;
+    min-height: 3.25rem;
+    margin-top: 0.5rem;
+    padding: 0.5rem 0;
+    background: transparent;
+    color: var(--color-fg-bone);
+    border: 0;
+    border-bottom: 1px solid var(--color-bone-line);
+    font-family: var(--font-sans);
+    font-size: 1.0625rem;
+    transition:
+      border-color 220ms var(--ease-out-expo),
+      box-shadow 220ms var(--ease-out-expo);
+  }
+  .field > textarea {
+    min-height: 7rem;
+    resize: vertical;
+  }
+  .field > input::placeholder,
+  .field > textarea::placeholder {
+    color: var(--color-fg-bone-muted);
+    opacity: 0.65;
+  }
+  .field > input:focus,
+  .field > select:focus,
+  .field > textarea:focus {
+    outline: none;
+    border-color: var(--color-flame-ink);
+    box-shadow: 0 1px 0 0 var(--color-flame-ink);
+  }
+  .field > select {
+    appearance: none;
+    cursor: pointer;
+  }
+}
+
+@layer utilities {
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 60;
+    pointer-events: none;
+    opacity: 0.042;
+    mix-blend-mode: multiply;
+  }
+
+  /* One slow warm bloom, hero only — the same restraint as the sister site */
+  .bloom {
+    position: absolute;
+    pointer-events: none;
+    inset-inline: -20%;
+    top: -30%;
+    height: 130%;
+    background: radial-gradient(
+      55% 45% at 50% 45%,
+      rgb(245 130 32 / 0.14) 0%,
+      rgb(245 130 32 / 0.05) 38%,
+      transparent 72%
+    );
+    animation: bloom-drift 26s var(--ease-out-expo) infinite alternate;
+  }
+  @keyframes bloom-drift {
+    from {
+      transform: translate3d(-6%, 0, 0) scale(1);
+      opacity: 0.75;
+    }
+    to {
+      transform: translate3d(6%, -3%, 0) scale(1.12);
+      opacity: 1;
+    }
+  }
+
+  .reveal > * {
+    opacity: 0;
+    transform: translate3d(0, 1.4rem, 0);
+    transition:
+      opacity 900ms var(--ease-out-expo),
+      transform 900ms var(--ease-out-expo);
+    transition-delay: calc(var(--i, 0) * 90ms);
+  }
+  .reveal.is-in > *,
+  .is-in .reveal > * {
+    opacity: 1;
+    transform: none;
+  }
+
+  .wipe {
+    display: block;
+    overflow: hidden;
+  }
+  .wipe > span {
+    display: block;
+    transform: translate3d(0, 105%, 0);
+    transition: transform 1100ms var(--ease-out-expo);
+    transition-delay: calc(var(--i, 0) * 110ms);
+  }
+  .is-in .wipe > span {
+    transform: none;
+  }
+
+  .contour-drift {
+    animation: contour-drift 44s linear infinite alternate;
+  }
+  @keyframes contour-drift {
+    from {
+      transform: translate3d(0, 0, 0) scale(1);
+    }
+    to {
+      transform: translate3d(-2.5%, 1.5%, 0) scale(1.06);
+    }
+  }
+
+  /* The burner ring turns very slowly, like a dial settling */
+  .burner-spin {
+    animation: burner-spin 120s linear infinite;
+  }
+  @keyframes burner-spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    .bloom,
+    .contour-drift,
+    .burner-spin {
+      animation: none;
+    }
+    .reveal > *,
+    .wipe > span {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+}
