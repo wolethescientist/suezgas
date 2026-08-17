@@ -7,27 +7,33 @@ import { PageHero, SectionHead } from "@/components/page-parts";
 export const metadata: Metadata = {
   title: "Pricing",
   description:
-    "Cylinder, refill, regulator and bundle pricing from Suez Gas Nigeria. LPG is a commodity — the price on the day is confirmed before your delivery moves.",
+    "Cylinder, refill, bulk LPG and hardware pricing from Suez Gas Nigeria. LPG is a commodity, so the price on the day is confirmed before delivery moves.",
 };
 
 const PRODUCTS = [
   {
+    name: "Bulk LPG supply",
+    detail: "Volume supply for off-takers, plants and industrial sites",
+    range: "Quote on request",
+    note: "By volume, route and schedule",
+  },
+  {
     name: "Gas refill",
     detail: "Your own cylinder, collected and returned full",
-    range: "₦16,000 – ₦65,000",
+    range: "₦16,000 - ₦65,000",
     note: "By cylinder size, 3 kg to 50 kg",
   },
   {
     name: "Gas cylinder",
     detail: "New cylinder, various capacities",
-    range: "₦56,500 – ₦180,000",
+    range: "₦56,500 - ₦180,000",
     note: "One-off purchase, yours to keep",
   },
   {
     name: "Regulator + cylinder + gas bundle",
-    detail: "Everything needed to start cooking",
-    range: "₦69,000 – ₦120,000",
-    note: "The usual choice for a new home",
+    detail: "Cylinder, regulator and gas for a new installation",
+    range: "₦69,000 - ₦120,000",
+    note: "For a new installation",
   },
   {
     name: "Suez Gas low-pressure regulator",
@@ -43,17 +49,17 @@ export default function PricingPage() {
       <PageHero
         eyebrow="Pricing"
         lines={["What it costs,", "before you order."]}
-        lede="LPG is a commodity and the landed price moves. These are current indicative ranges — the exact figure for your size is confirmed by a representative before anything is delivered."
+        lede="LPG is a commodity and the landed price moves. Cylinder ranges are indicative, while bulk and commercial supply is quoted around volume, route and schedule."
         aside={
           <div className="border-l border-bone-line pl-6">
             <div className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-bone-muted">
-              Refills from
+              Bulk volumes
             </div>
             <div className="mt-2 font-display text-[clamp(2.75rem,6vw,4.25rem)] leading-none text-flame-ink">
-              ₦16,000
+              Quoted
             </div>
             <p className="mt-3 max-w-[16rem] text-sm text-fg-bone-muted">
-              3 kg cylinder. Larger sizes scale with weight, not with a markup.
+              Tell us the site, consumption and delivery rhythm. We will build the right quote.
             </p>
           </div>
         }
@@ -65,7 +71,7 @@ export default function PricingPage() {
         <Reveal className="measure relative">
           <SectionHead
             eyebrow="Products"
-            title="Cylinders, refills and hardware."
+            title="Cylinder, bulk and hardware pricing."
             note="Indicative. Confirmed on order."
           />
 
@@ -111,7 +117,7 @@ export default function PricingPage() {
 
           <p className="reveal mt-10 max-w-2xl text-[0.6875rem] uppercase leading-relaxed tracking-[0.075em] text-fg-ink-muted">
             Prices exclude delivery outside the Abuja metropolis. Bulk and
-            commercial volumes are quoted separately.
+            commercial volumes are quoted separately around the site and route.
           </p>
         </Reveal>
       </section>

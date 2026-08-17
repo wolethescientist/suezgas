@@ -7,28 +7,28 @@ import { PageHero, SectionHead } from "@/components/page-parts";
 export const metadata: Metadata = {
   title: "Our services",
   description:
-    "Gas delivery, bulk LPG haulage, professional installation and gas consultancy across Abuja — from Suez Gas Nigeria.",
+    "LPG supply, bulk haulage, storage planning, professional installation and gas consultancy across Abuja from Suez Gas Nigeria.",
 };
 
 const SERVICES = [
   {
     id: "delivery",
-    tag: "Service 01",
-    title: "Gas delivery",
+    tag: "Cylinder distribution",
+    title: "Cylinder delivery",
     lede: "Personalised cylinder pick-up and delivery to your doorstep, on our own vehicles.",
     body: [
-      "Whatever your LPG requirement, we have a solution to suit the individual needs of your home or organisation — low carbon, reliable and safe, so you can get on with running your business.",
+      "Whatever your LPG requirement, we build the delivery around the reality of your home, estate or organisation, with reliable and safe service you can plan around.",
       "Fast and efficient delivery schedules, experienced drivers who take the utmost care on your property, and competitive prices. We collect the empty cylinder and return it filled.",
     ],
     facts: [
-      ["Sizes", "3 – 50 kg"],
+      ["Sizes", "3-50 kg"],
       ["Window", "Same day"],
       ["Weighing", "Digital scale at your door"],
     ],
   },
   {
     id: "haulage",
-    tag: "Service 02",
+    tag: "Bulk haulage",
     title: "Gas haulage",
     lede: "Bulk LPG moved by road to off-takers, plants and industrial sites.",
     body: [
@@ -43,9 +43,9 @@ const SERVICES = [
   },
   {
     id: "installation",
-    tag: "Service 03",
+    tag: "Plant installation",
     title: "Professional installation",
-    lede: "Regulators, hoses, manifolds and appliance connections, fitted properly.",
+    lede: "Storage, regulators, hoses, manifolds and appliance connections, fitted properly.",
     body: [
       "Most domestic gas incidents trace back to a bad connection, a perished hose or a regulator that was never right for the appliance. Installation is where safety is actually decided.",
       "Our field staff are equipped and trained for the work, and we will tell you plainly when a component needs replacing rather than reconnecting.",
@@ -58,8 +58,8 @@ const SERVICES = [
   },
   {
     id: "consultancy",
-    tag: "Service 04",
-    title: "Consultancy",
+    tag: "Supply planning",
+    title: "LPG systems consultancy",
     lede: "Sizing, siting and specification for organisations moving to or scaling up on LPG.",
     body: [
       "For estates, hospitality groups and food producers, the questions are how much storage, where it can legally and safely sit, and what the refill cycle should look like at your consumption.",
@@ -78,8 +78,8 @@ export default function ServicesPage() {
     <>
       <PageHero
         eyebrow="What we do"
-        lines={["Four services,", "one supply chain."]}
-        lede="Delivery to the door, bulk haulage to the plant, installation that holds, and advice from people who move the product every day."
+        lines={["One supply chain,", "four ways in."]}
+        lede="Storage planning, bulk haulage, cylinder distribution and installation from people who move LPG into the places where work happens."
       />
 
       {SERVICES.map((s, i) => {

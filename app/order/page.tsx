@@ -5,7 +5,7 @@ import { Reveal, WipeLines } from "@/components/reveal";
 export const metadata: Metadata = {
   title: "Order gas",
   description:
-    "Request a cooking gas refill or a new cylinder in Abuja. A representative confirms the size, the day's price and your delivery window before anything moves.",
+    "Request LPG delivery, a cylinder refill or bulk commercial supply in Abuja. A representative confirms the requirement, price and delivery window before anything moves.",
 };
 
 const STEPS = [
@@ -35,9 +35,9 @@ export default function OrderPage() {
               className="mt-8 max-w-xl text-body-l text-fg-bone-muted"
               style={{ "--i": 2 } as React.CSSProperties}
             >
-              Requests placed before mid-afternoon are normally delivered the same
-              day across the Abuja metropolis. Nothing is charged until a
-              representative has confirmed the price with you.
+              Tell us the cylinder size, site or commercial volume you need.
+              Nothing is charged until a representative has confirmed the
+              requirement, price and delivery window with you.
             </p>
           </div>
         </Reveal>
@@ -119,7 +119,7 @@ export default function OrderPage() {
                       <option value="12.5">12.5 kg</option>
                       <option value="25">25 kg</option>
                       <option value="50">50 kg</option>
-                      <option value="bulk">Bulk — I will describe below</option>
+                      <option value="bulk">Bulk - I will describe below</option>
                     </select>
                   </p>
                 </div>

@@ -7,7 +7,7 @@ import { NumberedRow, PageHero, SectionHead } from "@/components/page-parts";
 export const metadata: Metadata = {
   title: "LPG safety",
   description:
-    "How to store, check and handle a cooking gas cylinder safely, what to do if you smell gas, and the checks Suez Gas performs on every delivery.",
+    "How to store, check and handle LPG equipment safely, what to do if you smell gas, and the checks Suez Gas performs on every delivery.",
 };
 
 const CHECKS = [

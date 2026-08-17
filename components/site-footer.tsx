@@ -36,8 +36,8 @@ export function SiteFooter() {
       <div className="relative border-b border-ink-line">
         <div className="measure grid grid-cols-2 divide-ink-line md:grid-cols-4 md:divide-x">
           {[
-            ["Cylinder sizes", "3 – 50 kg"],
-            ["Delivery", "Same day"],
+            ["Supply modes", "Cylinder + bulk"],
+            ["Bulk movement", "Road tanker"],
             ["Every drop", "Digitally weighed"],
             ["Supplying since", "2012"],
           ].map(([label, value], i) => (
@@ -60,7 +60,7 @@ export function SiteFooter() {
         <div>
           <div className="eyebrow">Suez Energy Group</div>
           <p className="mt-6 max-w-sm font-display text-[1.625rem] leading-[1.15] sm:text-[2rem]">
-            Cooking gas to the same estates, hotels and bakeries since 2012.
+            LPG supply for homes, estates, hotels, bakeries and industrial sites since 2012.
           </p>
 
           <address className="mt-9 space-y-3 not-italic">

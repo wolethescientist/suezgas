@@ -4,6 +4,7 @@ import "./globals.css";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
 import { Grain } from "@/components/texture";
+import { Chatbot } from "@/components/chatbot";
 
 // Display (Zodiak) and body (Switzer) load from Fontshare in globals.css.
 // Mono is reserved for real data — weights, prices, cylinder sizes.
@@ -16,16 +17,16 @@ const mono = IBM_Plex_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Suez Gas Nigeria — Cooking gas, delivered and weighed at your door",
-    template: "%s — Suez Gas Nigeria",
+    default: "Suez Gas Nigeria - LPG supply, storage and haulage",
+    template: "%s - Suez Gas Nigeria",
   },
   description:
-    "Domestic and commercial LPG in Abuja since 2012. Cylinder refills from 3kg to 50kg, bulk haulage, professional installation and consultancy — every delivery weighed on a digital scale at your door.",
+    "Commercial, industrial and residential LPG supply in Nigeria since 2012. Storage planning, bulk haulage, cylinder distribution, installation and consultancy from the Suez energy group.",
   metadataBase: new URL("https://suezgas.com"),
   openGraph: {
-    title: "Suez Gas Nigeria — Cooking gas, delivered and weighed at your door",
+    title: "Suez Gas Nigeria - LPG supply, storage and haulage",
     description:
-      "Domestic and commercial LPG distribution in Abuja since 2012. Part of the Suez energy group.",
+      "LPG supply, storage planning, bulk haulage and cylinder distribution for homes, estates, hospitality, food production and industrial operations.",
     type: "website",
     locale: "en_NG",
   },
@@ -55,6 +56,7 @@ export default function RootLayout({
         <SiteHeader />
         <main id="main">{children}</main>
         <SiteFooter />
+        <Chatbot />
       </body>
     </html>
   );

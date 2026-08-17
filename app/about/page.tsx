@@ -7,13 +7,13 @@ import { PageHero, PullQuote, SectionHead, StatRow } from "@/components/page-par
 export const metadata: Metadata = {
   title: "About us",
   description:
-    "Suez Gas Nigeria Limited (RC 1076785) has distributed domestic and commercial LPG from Wuse II, Abuja since 2012. Part of the Suez energy group alongside SuezElectric.",
+    "Suez Gas Nigeria Limited (RC 1076785) has supplied commercial, industrial and residential LPG from Wuse II, Abuja since 2012. Part of the Suez energy group.",
 };
 
 const GROUP = [
   [
     "Suez Gas Nigeria",
-    "Domestic and commercial LPG — homes, estates, hotels, lounges, bars, eateries and bakeries.",
+    "LPG supply for homes, estates, hospitality, food production and industrial operations.",
     "This company",
   ],
   [
@@ -34,7 +34,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="RC 1076785 · Wuse II, Abuja"
         lines={["An independent", "energy supplier."]}
-        lede="We specialise in the distribution and supply of domestic LPG and natural gas for industrial, commercial and residential use — and in the development of natural gas utilisation projects."
+        lede="We specialise in LPG supply for industrial, commercial and residential use, from cylinder distribution and road tanker haulage to storage planning and plant installation."
         aside={
           <dl className="space-y-4 border-l border-bone-line pl-6">
             {[
@@ -60,8 +60,8 @@ export default function AboutPage() {
           <div className="reveal">
             <div style={{ "--i": 0 } as React.CSSProperties}>
               <PullQuote>
-                Our mission is to make domestic LPG use a safer and easier
-                experience for everyone.
+                Our mission is to make LPG supply safer and easier to plan at
+                every scale.
               </PullQuote>
             </div>
             <p
@@ -85,7 +85,7 @@ export default function AboutPage() {
           <SectionHead
             eyebrow="Who we serve"
             title="One cylinder or a plant room."
-            note="Residential · commercial · industrial"
+            note="Residential / commercial / industrial"
           />
 
           <Reveal className="reveal mt-14 grid gap-x-14 gap-y-10 md:grid-cols-2">
@@ -104,7 +104,7 @@ export default function AboutPage() {
               ],
               [
                 "Industrial and projects",
-                "Natural gas utilisation projects and industrial supply, with the group's import and haulage behind it.",
+                "Industrial supply and natural gas utilisation projects, with the group's import and haulage behind them.",
               ],
             ].map(([title, body], i) => (
               <div
@@ -126,7 +126,7 @@ export default function AboutPage() {
         <Reveal className="measure relative">
           <SectionHead
             eyebrow="The group"
-            title="Three companies, one route."
+            title="Three companies behind the supply."
             note="Import, haulage, domestic distribution and electricity"
           />
           <Reveal className="reveal mt-14">
@@ -152,7 +152,7 @@ export default function AboutPage() {
               items={[
                 { label: "Incorporated", value: "2012" },
                 { label: "Base", value: "Wuse II" },
-                { label: "Cylinder range", value: "3–50 kg" },
+                { label: "Cylinder range", value: "3-50 kg" },
                 { label: "Group companies", value: "3" },
               ]}
             />
@@ -164,7 +164,7 @@ export default function AboutPage() {
         <Contours origin={{ x: 30, y: 45 }} rings={24} opacity={0.55} />
         <Reveal className="measure relative flex flex-col gap-8 lg:flex-row lg:items-end lg:justify-between">
           <h2 className="max-w-xl text-display-m">
-            Order a refill, or talk to us about volume.
+            Need LPG at a larger scale?
           </h2>
           <div className="flex flex-wrap gap-3">
             <Link href="/order" className="btn btn-flame">
