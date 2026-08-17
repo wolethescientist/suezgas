@@ -12,10 +12,6 @@ export type GasMarket = {
   live: boolean;
 };
 
-const SYMBOLS = "HENRY_HUB,TTF_GAS";
-
-// These keep the tape useful on first load and when the upstream API is down.
-// They are intentionally labelled as reference data in the UI.
 const REFERENCE_MARKETS: GasMarket[] = [
   {
     id: "ng",
@@ -26,39 +22,6 @@ const REFERENCE_MARKETS: GasMarket[] = [
     currency: "NGN",
     change: 0,
     date: "2026-07-29",
-    live: false,
-  },
-  {
-    id: "us",
-    region: "United States",
-    market: "Henry Hub",
-    value: 3.1,
-    unit: "USD / MMBtu",
-    currency: "USD",
-    change: 1.8,
-    date: "2026-07-20",
-    live: false,
-  },
-  {
-    id: "eu",
-    region: "Europe",
-    market: "TTF day-ahead",
-    value: 32.4,
-    unit: "EUR / MWh",
-    currency: "EUR",
-    change: -0.9,
-    date: "2026-07-24",
-    live: false,
-  },
-  {
-    id: "asia",
-    region: "Asia Pacific",
-    market: "LNG import reference",
-    value: 11.8,
-    unit: "USD / MMBtu",
-    currency: "USD",
-    change: 2.4,
-    date: "2026-07-24",
     live: false,
   },
   {
@@ -74,61 +37,63 @@ const REFERENCE_MARKETS: GasMarket[] = [
   },
 ];
 
-type EnergyApiResponse = {
-  success?: boolean;
-  date?: string;
-  rates?: Record<string, number>;
-  dates?: Record<string, string>;
-  currencies?: Record<string, string>;
-};
+const FREE_SERIES = [
+  { id: "us", region: "United States", market: "Henry Hub", series: "DHHNGSP", unit: "USD / MMBtu" },
+  { id: "eu", region: "Europe", market: "EU natural gas", series: "PNGASEUUSDM", unit: "USD / MMBtu" },
+  { id: "asia", region: "Asia Pacific", market: "Asia LNG", series: "PNGASJPUSDM", unit: "USD / MMBtu" },
+] as const;
 
-function withLiveBenchmarks(data: EnergyApiResponse) {
-  const markets = REFERENCE_MARKETS.map((market) => {
-    const symbol = market.id === "us" ? "HENRY_HUB" : market.id === "eu" ? "TTF_GAS" : undefined;
-    const value = symbol ? data.rates?.[symbol] : undefined;
+type FredPoint = { date: string; value: number };
 
-    return value == null || !symbol
-      ? market
-      : {
-          ...market,
-          value,
-          currency: data.currencies?.[symbol] ?? market.currency,
-          date: data.dates?.[symbol] ?? data.date ?? market.date,
-          live: true,
-        };
+async function readFredSeries(series: string): Promise<FredPoint[]> {
+  const response = await fetch(`https://fred.stlouisfed.org/graph/fredgraph.csv?id=${series}`, {
+    next: { revalidate: 1800 },
   });
+  if (!response.ok) throw new Error(`FRED returned ${response.status}`);
 
-  return markets;
+  const csv = await response.text();
+  return csv
+    .trim()
+    .split(/\r?\n/)
+    .slice(1)
+    .map((line) => {
+      const [date, rawValue] = line.split(",");
+      return { date, value: Number(rawValue) };
+    })
+    .filter((point) => point.date && Number.isFinite(point.value));
 }
 
 export async function GET() {
-  const apiKey = process.env.ENERGY_API_KEY;
-
-  if (!apiKey) {
-    return NextResponse.json({
-      markets: REFERENCE_MARKETS,
-      source: "reference",
-      updatedAt: new Date().toISOString(),
-    });
-  }
-
   try {
-    const url = new URL("https://energy-api.com/api/v1/latest");
-    url.searchParams.set("api_key", apiKey);
-    url.searchParams.set("symbols", SYMBOLS);
+    const liveMarkets = await Promise.all(
+      FREE_SERIES.map(async (market) => {
+        const points = await readFredSeries(market.series);
+        const latest = points.at(-1);
+        const previous = points.at(-2);
+        if (!latest) throw new Error(`No data for ${market.series}`);
 
-    const response = await fetch(url, { next: { revalidate: 300 } });
-    if (!response.ok) throw new Error(`Energy API returned ${response.status}`);
+        return {
+          id: market.id,
+          region: market.region,
+          market: market.market,
+          value: latest.value,
+          unit: market.unit,
+          currency: "USD",
+          change: previous ? ((latest.value - previous.value) / previous.value) * 100 : 0,
+          date: latest.date,
+          live: true,
+        } satisfies GasMarket;
+      }),
+    );
 
-    const data = (await response.json()) as EnergyApiResponse;
     return NextResponse.json({
-      markets: withLiveBenchmarks(data),
-      source: "energy-api",
+      markets: [REFERENCE_MARKETS[0], ...liveMarkets, REFERENCE_MARKETS[1]],
+      source: "free-api",
       updatedAt: new Date().toISOString(),
     });
   } catch {
     return NextResponse.json({
-      markets: REFERENCE_MARKETS,
+      markets: [REFERENCE_MARKETS[0], ...REFERENCE_MARKETS.slice(1)],
       source: "reference",
       updatedAt: new Date().toISOString(),
     });

@@ -18,7 +18,7 @@ function formatPrice(market: GasMarket) {
 
 export function GlobalGasTicker() {
   const [markets, setMarkets] = useState(INITIAL_MARKETS);
-  const [source, setSource] = useState<"reference" | "energy-api">("reference");
+  const [source, setSource] = useState<"reference" | "free-api">("reference");
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
@@ -28,7 +28,7 @@ export function GlobalGasTicker() {
       try {
         const response = await fetch("/api/gas-prices", { cache: "no-store" });
         if (!response.ok) return;
-        const data = (await response.json()) as { markets: GasMarket[]; source: "reference" | "energy-api" };
+        const data = (await response.json()) as { markets: GasMarket[]; source: "reference" | "free-api" };
         if (active && data.markets?.length) {
           setMarkets(data.markets);
           setSource(data.source);
@@ -51,8 +51,8 @@ export function GlobalGasTicker() {
   return (
     <section className="on-ink market-ticker" aria-label="Global gas market prices">
       <div className="market-ticker-label" aria-live="polite">
-        <span className={`gas-live-dot ${source === "energy-api" ? "gas-live-dot-active" : ""}`} />
-        <span>{source === "energy-api" ? "Live markets" : "Market watch"}</span>
+        <span className={`gas-live-dot ${source === "free-api" ? "gas-live-dot-active" : ""}`} />
+        <span>{source === "free-api" ? "Live markets" : "Market watch"}</span>
       </div>
 
       <div className="market-ticker-viewport" data-paused={paused}>
