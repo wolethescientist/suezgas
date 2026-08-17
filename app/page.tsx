@@ -2,6 +2,7 @@ import Link from "next/link";
 import { Burner, Contours } from "@/components/texture";
 import { Reveal, WipeLines } from "@/components/reveal";
 import { CylinderGauge } from "@/components/cylinder-gauge";
+import { GlobalGasTicker } from "@/components/global-gas-ticker";
 import { NumberedRow, PullQuote, SectionHead, StatRow } from "@/components/page-parts";
 
 const SIZES = ["3 kg", "6 kg", "12.5 kg", "25 kg", "50 kg", "Bulk / tanker"];
@@ -65,6 +66,8 @@ export default function HomePage() {
           </div>
         </div>
       </section>
+
+      <GlobalGasTicker />
 
       {/* ───────────────────────── How ordering works (ink) ───────────────────────── */}
       <section className="on-ink relative overflow-hidden py-20 lg:py-28">

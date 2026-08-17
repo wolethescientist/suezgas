@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Burner, Contours } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
-import { GlobalGasTicker } from "@/components/global-gas-ticker";
 import { PageHero, SectionHead } from "@/components/page-parts";
 
 export const metadata: Metadata = {
@@ -116,8 +115,6 @@ export default function PricingPage() {
           </p>
         </Reveal>
       </section>
-
-      <GlobalGasTicker />
 
       {/* How we price */}
       <section className="relative overflow-hidden border-b border-bone-line py-20 lg:py-28">
