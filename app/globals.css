@@ -200,6 +200,73 @@
     border-color: var(--color-fg-ink-muted);
   }
 
+  /* ---------- Global market tape ---------- */
+  .gas-market-section {
+    position: relative;
+    overflow: hidden;
+    padding-block: 5rem 4.5rem;
+  }
+  .gas-live-dot {
+    width: 0.45rem;
+    height: 0.45rem;
+    border-radius: 9999px;
+    background: var(--color-fg-ink-muted);
+  }
+  .gas-live-dot-active {
+    background: var(--color-flame);
+    box-shadow: 0 0 0 0 rgb(245 130 32 / 0.45);
+    animation: gas-live-pulse 1.8s ease-out infinite;
+  }
+  @keyframes gas-live-pulse {
+    70% { box-shadow: 0 0 0 0.45rem rgb(245 130 32 / 0); }
+    100% { box-shadow: 0 0 0 0 rgb(245 130 32 / 0); }
+  }
+  .gas-ticker-control {
+    border-bottom: 1px solid var(--color-ink-line);
+    color: var(--color-fg-ink);
+    cursor: pointer;
+    transition: color 200ms var(--ease-out-expo), border-color 200ms var(--ease-out-expo);
+  }
+  .gas-ticker-control:hover {
+    border-color: var(--color-flame);
+    color: var(--color-flame);
+  }
+  .gas-ticker-viewport {
+    position: relative;
+    overflow: hidden;
+    margin-inline: calc(clamp(1.25rem, 5vw, 5.5rem) * -1);
+    padding-inline: clamp(1.25rem, 5vw, 5.5rem);
+    mask-image: linear-gradient(to right, transparent, #000 5%, #000 95%, transparent);
+  }
+  .gas-ticker-track {
+    display: flex;
+    width: max-content;
+    padding-top: 2.25rem;
+    animation: gas-market-tape 42s linear infinite;
+  }
+  .gas-ticker-viewport[data-paused="true"] .gas-ticker-track,
+  .gas-ticker-viewport:hover .gas-ticker-track {
+    animation-play-state: paused;
+  }
+  .gas-market-item {
+    flex: 0 0 min(21rem, 76vw);
+    min-height: 18rem;
+    padding: 0 2rem;
+    border-left: 1px solid var(--color-ink-line);
+  }
+  .gas-market-item:last-child {
+    border-right: 1px solid var(--color-ink-line);
+  }
+  .gas-market-index {
+    color: var(--color-fg-ink-muted);
+    font-family: var(--font-mono);
+    font-size: 0.6875rem;
+  }
+  @keyframes gas-market-tape {
+    from { transform: translate3d(0, 0, 0); }
+    to { transform: translate3d(-50%, 0, 0); }
+  }
+
   /* ---------- Ink (dark) sections — the accent, not the default ---------- */
   .on-ink {
     background: var(--color-ink);
@@ -439,7 +506,9 @@
     }
     .bloom,
     .contour-drift,
-    .burner-spin {
+    .burner-spin,
+    .gas-ticker-track,
+    .gas-live-dot-active {
       animation: none;
     }
     .reveal > *,
@@ -448,6 +517,9 @@
       opacity: 1;
       transform: none;
       transition: none;
+    }
+    .gas-ticker-track {
+      transform: none;
     }
   }
 }
