@@ -34,12 +34,19 @@ export function Contours({
   className = "",
   tone = "bone",
   opacity = 1,
+  /**
+   * Hold depth against the scroll. Native `animation-timeline: view()` — it uses
+   * the independent `translate`/`scale` properties precisely because those
+   * compose with the centring `transform` below instead of overwriting it.
+   */
+  depth = false,
 }: {
   origin?: { x: number; y: number };
   rings?: number;
   className?: string;
   tone?: "bone" | "ink";
   opacity?: number;
+  depth?: boolean;
 }) {
   const stroke = tone === "bone" ? "#bdb19a" : "#4a525c";
   const paths = Array.from({ length: rings }, (_, i) => {
@@ -58,7 +65,7 @@ export function Contours({
     >
       {/* Centring lives on the wrapper; the drift animation owns transform on the svg. */}
       <div
-        className="absolute h-[165%] w-[165%] max-w-none"
+        className={`absolute h-[165%] w-[165%] max-w-none${depth ? " hero-depth" : ""}`}
         style={{
           left: `${origin.x}%`,
           top: `${origin.y}%`,

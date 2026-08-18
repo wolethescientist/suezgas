@@ -1,8 +1,9 @@
 import Link from "next/link";
 import { Burner, Contours } from "@/components/texture";
-import { Reveal, WipeLines } from "@/components/reveal";
+import { Reveal, WipeWords } from "@/components/reveal";
 import { GlobalGasTicker } from "@/components/global-gas-ticker";
 import { NumberedRow, PullQuote, SectionHead, StatRow } from "@/components/page-parts";
+import { HeroCanvas, HeroTelemetry } from "@/components/hero-canvas";
 import { LpgInfrastructure } from "@/components/lpg-infrastructure";
 import { SocialMediaSection } from "@/components/social-media";
 
@@ -13,22 +14,32 @@ const SUPPLY_MODES = [
   "Plant installation",
 ];
 
+const HERO_TELEMETRY = [
+  { label: "Supplying since", value: "2012" },
+  { label: "Cylinder range", value: "3–50", unit: "kg" },
+  { label: "Supply modes", value: "04" },
+  { label: "Dispatch", value: "Live", live: true },
+];
+
 export default function HomePage() {
   return (
     <>
       {/* ───────────────────────── Hero (bone) ───────────────────────── */}
-      <section className="relative overflow-hidden border-b border-bone-line pb-14 pt-32 sm:pt-40 lg:pb-20 lg:pt-48">
-        <Contours origin={{ x: 74, y: 34 }} rings={32} />
+      <HeroCanvas
+        stamp="SU-GAS / 01 · Abuja"
+        className="border-b border-bone-line pb-14 pt-32 sm:pt-40 lg:pb-20 lg:pt-48"
+      >
+        <Contours origin={{ x: 74, y: 34 }} rings={32} depth />
         <div className="bloom" />
 
         <Reveal className="measure relative" immediate>
           <div className="grid gap-14 lg:grid-cols-[1.2fr_0.85fr] lg:items-center lg:gap-16">
-            <div className="reveal">
+            <div className="reveal hero-parallax">
               <div className="eyebrow" style={{ "--i": 0 } as React.CSSProperties}>
                 Bulk LPG infrastructure
               </div>
               <h1 className="mt-7 text-display-l">
-                <WipeLines lines={["LPG at", "commercial scale."]} />
+                <WipeWords lines={["LPG at", "commercial scale."]} />
               </h1>
 
               <p
@@ -53,7 +64,7 @@ export default function HomePage() {
               </div>
             </div>
 
-            <div className="reveal">
+            <div className="reveal hero-parallax-slow">
               <div
                 className="on-ink rounded-2xl"
                 style={{ "--i": 6 } as React.CSSProperties}
@@ -64,17 +75,24 @@ export default function HomePage() {
           </div>
         </Reveal>
 
-        {/* Sizes, as a gauge scale rather than a product grid */}
-        <div className="measure relative mt-16 lg:mt-20">
-          <div className="rule-ticks" />
-          <div className="flex flex-wrap items-baseline gap-x-7 gap-y-2 pt-6 text-[0.6875rem] font-medium uppercase tracking-[0.075em] text-fg-bone-muted">
-            <span className="text-flame-ink">What we handle</span>
-            {SUPPLY_MODES.map((s) => (
-              <span key={s}>{s}</span>
-            ))}
+        {/* The readout, then the capability legend under it */}
+        <Reveal className="measure relative mt-16 lg:mt-20">
+          <div className="reveal">
+            <div style={{ "--i": 0 } as React.CSSProperties}>
+              <HeroTelemetry items={HERO_TELEMETRY} />
+            </div>
+            <div
+              className="mt-9 flex flex-wrap items-baseline gap-x-7 gap-y-2 border-t border-bone-line pt-6 text-[0.6875rem] font-medium uppercase tracking-[0.075em] text-fg-bone-muted"
+              style={{ "--i": 1 } as React.CSSProperties}
+            >
+              <span className="text-flame-ink">What we handle</span>
+              {SUPPLY_MODES.map((s) => (
+                <span key={s}>{s}</span>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </Reveal>
+      </HeroCanvas>
 
       <GlobalGasTicker />
 

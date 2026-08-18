@@ -50,6 +50,13 @@ export default function PricingPage() {
         eyebrow="Pricing"
         lines={["What it costs,", "before you order."]}
         lede="LPG is a commodity and the landed price moves. Cylinder ranges are indicative, while bulk and commercial supply is quoted around volume, route and schedule."
+        stamp="SU-GAS / 04 · Rate card"
+        telemetry={[
+          { label: "Listed items", value: "05" },
+          { label: "Refill from", value: "₦16,000" },
+          { label: "Priced by", value: "Kilogram" },
+          { label: "Day rate", value: "Confirmed", live: true },
+        ]}
         aside={
           <div className="border-l border-bone-line pl-6">
             <div className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-bone-muted">

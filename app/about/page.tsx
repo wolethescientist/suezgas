@@ -35,6 +35,13 @@ export default function AboutPage() {
         eyebrow="RC 1076785 · Wuse II, Abuja"
         lines={["An independent", "energy supplier."]}
         lede="We specialise in LPG supply for industrial, commercial and residential use, from cylinder distribution and road tanker haulage to storage planning and plant installation."
+        stamp="SU-GAS / 02 · RC 1076785"
+        telemetry={[
+          { label: "Incorporated", value: "2012" },
+          { label: "Group companies", value: "03" },
+          { label: "Base", value: "Wuse II" },
+          { label: "Trading", value: "Active", live: true },
+        ]}
         aside={
           <dl className="space-y-4 border-l border-bone-line pl-6">
             {[

@@ -80,6 +80,13 @@ export default function ServicesPage() {
         eyebrow="What we do"
         lines={["One supply chain,", "four ways in."]}
         lede="Storage planning, bulk haulage, cylinder distribution and installation from people who move LPG into the places where work happens."
+        stamp="SU-GAS / 03 · Service lines"
+        telemetry={[
+          { label: "Service lines", value: "04" },
+          { label: "Cylinder range", value: "3–50", unit: "kg" },
+          { label: "Bulk mode", value: "Road tanker" },
+          { label: "Scheduling", value: "Agreed", live: true },
+        ]}
       />
 
       {SERVICES.map((s, i) => {

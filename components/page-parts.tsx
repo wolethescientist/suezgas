@@ -1,25 +1,40 @@
 import type { ReactNode } from "react";
 import { Contours } from "./texture";
-import { Reveal, WipeLines } from "./reveal";
+import { Reveal, WipeWords } from "./reveal";
+import { HeroCanvas, HeroTelemetry, type TelemetryItem } from "./hero-canvas";
 
-/** Inner-page hero. Bone canvas, contour eye off-frame right. */
+/**
+ * Inner-page hero. Bone canvas, contour eye off-frame right, heat under the
+ * pointer, and a telemetry rail reporting the figures that matter on that page.
+ * Every page hero on the site comes through here, which is what keeps the
+ * instrument language identical across all of them.
+ */
 export function PageHero({
   eyebrow,
   lines,
   lede,
   aside,
+  stamp,
+  telemetry,
 }: {
   eyebrow: string;
   lines: string[];
   lede?: string;
   aside?: ReactNode;
+  /** Equipment plate number, e.g. "SU-GAS / 02 · RC 1076785" */
+  stamp?: string;
+  telemetry?: TelemetryItem[];
 }) {
   return (
-    <section className="relative overflow-hidden border-b border-bone-line pb-16 pt-36 sm:pb-20 sm:pt-44">
-      <Contours origin={{ x: 92, y: 22 }} rings={24} opacity={0.6} />
+    <HeroCanvas
+      stamp={stamp}
+      className="border-b border-bone-line pb-16 pt-36 sm:pb-20 sm:pt-44"
+    >
+      <Contours origin={{ x: 92, y: 22 }} rings={24} opacity={0.6} depth />
+      <div className="bloom" />
       <Reveal className="measure relative" immediate>
         <div className="grid gap-12 lg:grid-cols-[1.35fr_0.85fr] lg:items-end lg:gap-20">
-          <div className="reveal">
+          <div className="reveal hero-parallax">
             <div className="eyebrow" style={{ "--i": 0 } as React.CSSProperties}>
               {eyebrow}
             </div>
@@ -27,7 +42,7 @@ export function PageHero({
               className="mt-7 text-display-l"
               style={{ "--i": 1 } as React.CSSProperties}
             >
-              <WipeLines lines={lines} />
+              <WipeWords lines={lines} />
             </h1>
             {lede && (
               <p
@@ -39,7 +54,7 @@ export function PageHero({
             )}
           </div>
           {aside && (
-            <div className="reveal lg:pb-2">
+            <div className="reveal hero-parallax-slow lg:pb-2">
               <div style={{ "--i": lines.length + 2 } as React.CSSProperties}>
                 {aside}
               </div>
@@ -47,7 +62,17 @@ export function PageHero({
           )}
         </div>
       </Reveal>
-    </section>
+
+      {telemetry && (
+        <Reveal className="measure relative mt-14 lg:mt-16">
+          <div className="reveal">
+            <div style={{ "--i": 0 } as React.CSSProperties}>
+              <HeroTelemetry items={telemetry} />
+            </div>
+          </div>
+        </Reveal>
+      )}
+    </HeroCanvas>
   );
 }
 

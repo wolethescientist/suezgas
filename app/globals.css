@@ -1016,3 +1016,348 @@
     }
   }
 }
+
+/* ═════════════════════════════════════════════════════════════════════════
+   HERO INSTRUMENT LAYER
+   The heroes stop being pictures of equipment and start behaving like it:
+   heat follows the pointer, contours hold depth against the scroll, gas
+   visibly moves through the schematic, and the headline sets itself word by
+   word like type coming off a press.
+
+   All of it is native — scroll-driven animation, independent transform
+   properties, SVG dash marching. No motion library, no scroll listener.
+   ═════════════════════════════════════════════════════════════════════════ */
+
+@layer components {
+  /* Deliberately NOT isolated: .hero-sweep blends with the page canvas behind
+     it, and an isolate here would give it a transparent backdrop to blend
+     against — which is to say, no visible sweep at all. */
+  .hero-canvas {
+    position: relative;
+    overflow: hidden;
+  }
+
+  /* Pointer heat. HeroCanvas writes --px/--py; CSS does everything else, so the
+     JS on the hot path is two numbers a frame and nothing more. */
+  .hero-heat {
+    position: absolute;
+    inset: -10%;
+    z-index: 0;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 900ms var(--ease-out-expo);
+    background: radial-gradient(
+      22rem 22rem at var(--px, 50%) var(--py, 42%),
+      rgb(245 130 32 / 0.2) 0%,
+      rgb(245 130 32 / 0.07) 40%,
+      transparent 70%
+    );
+  }
+  .hero-canvas[data-warm="true"] .hero-heat {
+    opacity: 1;
+  }
+  .on-ink .hero-heat {
+    background: radial-gradient(
+      22rem 22rem at var(--px, 50%) var(--py, 42%),
+      rgb(245 130 32 / 0.26) 0%,
+      rgb(245 130 32 / 0.09) 40%,
+      transparent 70%
+    );
+  }
+
+  /* A single specular pass on load — light travelling over brushed metal.
+     Once, never looping: the restraint is what keeps it feeling expensive. */
+  .hero-sweep {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+    background: linear-gradient(
+      104deg,
+      transparent 40%,
+      rgb(255 255 255 / 0.55) 50%,
+      transparent 60%
+    );
+    transform: translate3d(-130%, 0, 0);
+    animation: hero-sweep 2200ms 460ms var(--ease-out-expo) both;
+  }
+  @keyframes hero-sweep {
+    to {
+      transform: translate3d(130%, 0, 0);
+    }
+  }
+
+  /* Plate number, the way it is stamped on real equipment. */
+  .hero-stamp {
+    position: absolute;
+    z-index: 1;
+    top: 7rem;
+    right: clamp(1.25rem, 5vw, 5.5rem);
+    display: none;
+    align-items: center;
+    gap: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.625rem;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--color-fg-bone-muted);
+  }
+  .hero-stamp::before {
+    content: "";
+    width: 2.25rem;
+    height: 1px;
+    background: currentColor;
+    opacity: 0.5;
+  }
+  .on-ink .hero-stamp {
+    color: var(--color-fg-ink-muted);
+  }
+  @media (min-width: 1024px) {
+    .hero-stamp {
+      display: flex;
+    }
+  }
+
+  /* ---------- Telemetry rail ---------- */
+  .telemetry {
+    position: relative;
+    z-index: 1;
+  }
+  .telemetry-grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1.75rem 1.5rem;
+    padding-top: 1.75rem;
+  }
+  @media (min-width: 640px) {
+    .telemetry-grid {
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+    }
+  }
+  .telemetry-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-family: var(--font-label);
+    font-weight: 500;
+    font-size: 0.625rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-fg-bone-muted);
+  }
+  .telemetry-value {
+    margin-top: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: clamp(1.3rem, 2.6vw, 1.95rem);
+    line-height: 1;
+    font-variant-numeric: tabular-nums;
+    color: var(--color-fg-bone);
+  }
+  .telemetry-value small {
+    margin-left: 0.35rem;
+    font-family: var(--font-label);
+    font-size: 0.6875rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-fg-bone-muted);
+  }
+  .on-ink .telemetry-label,
+  .on-ink .telemetry-value small {
+    color: var(--color-fg-ink-muted);
+  }
+  .on-ink .telemetry-value {
+    color: var(--color-fg-ink);
+  }
+
+  .telemetry-led {
+    flex: none;
+    width: 0.4rem;
+    height: 0.4rem;
+    border-radius: 9999px;
+    background: var(--color-flame-ink);
+    animation: telemetry-pulse 2.6s var(--ease-out-expo) infinite;
+  }
+  .on-ink .telemetry-led {
+    background: var(--color-flame);
+  }
+  @keyframes telemetry-pulse {
+    0% {
+      box-shadow: 0 0 0 0 rgb(245 130 32 / 0.5);
+    }
+    70% {
+      box-shadow: 0 0 0 0.5rem rgb(245 130 32 / 0);
+    }
+    100% {
+      box-shadow: 0 0 0 0 rgb(245 130 32 / 0);
+    }
+  }
+
+  /* ---------- Buttons: shine on hover, weight on press ---------- */
+  .btn {
+    position: relative;
+    isolation: isolate;
+    overflow: hidden;
+    transition:
+      background-color 200ms var(--ease-out-expo),
+      color 200ms var(--ease-out-expo),
+      border-color 200ms var(--ease-out-expo),
+      transform 220ms var(--ease-out-expo),
+      box-shadow 260ms var(--ease-out-expo);
+  }
+  .btn:active {
+    transform: scale(0.975);
+  }
+  /* z-index:-1 inside an isolated parent paints over the fill but under the
+     label, so the sweep never washes out the text. */
+  .btn-flame::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(
+      100deg,
+      transparent 34%,
+      rgb(255 255 255 / 0.45) 50%,
+      transparent 66%
+    );
+    transform: translate3d(-130%, 0, 0);
+    transition: transform 720ms var(--ease-out-expo);
+  }
+  .btn-flame:hover::before {
+    transform: translate3d(130%, 0, 0);
+  }
+
+  /* ---------- Schematic motion (LpgInfrastructure) ---------- */
+  .flow-line {
+    stroke-dasharray: 14 22;
+    animation: flow-march 1.5s linear infinite;
+  }
+  @keyframes flow-march {
+    to {
+      stroke-dashoffset: -36;
+    }
+  }
+  .flow-node {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: flow-node 2.6s var(--ease-out-expo) infinite;
+  }
+  .flow-node-late {
+    animation-delay: 0.7s;
+  }
+  @keyframes flow-node {
+    0%,
+    100% {
+      opacity: 0.4;
+      scale: 1;
+    }
+    50% {
+      opacity: 1;
+      scale: 1.6;
+    }
+  }
+  /* The vessel fills to its rated level once, then holds — a gauge settling. */
+  .level-fill {
+    transform-box: fill-box;
+    transform-origin: bottom;
+    animation: level-fill 2600ms 500ms var(--ease-out-expo) both;
+  }
+  @keyframes level-fill {
+    from {
+      scale: 1 0;
+    }
+    to {
+      scale: 1 1;
+    }
+  }
+  .panel-scan {
+    animation: panel-scan 9s linear infinite;
+  }
+  @keyframes panel-scan {
+    from {
+      transform: translateY(-120%);
+    }
+    to {
+      transform: translateY(120%);
+    }
+  }
+}
+
+@layer utilities {
+  /* Word-level headline setting. Transform is written inline from React state,
+     so no stylesheet ordering can lose it. */
+  .wipe-word {
+    display: inline-block;
+    transform-origin: 0% 100%;
+    will-change: transform;
+  }
+
+  /* Scroll depth, native. `translate`/`scale` are used instead of `transform`
+     precisely because they compose with the inline `transform` the texture
+     layer already owns for centring, rather than overwriting it. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .hero-depth {
+        animation: hero-depth linear both;
+        animation-timeline: view();
+        animation-range: cover 0% cover 100%;
+      }
+      @keyframes hero-depth {
+        from {
+          translate: 0 -3%;
+          scale: 1.02;
+        }
+        to {
+          translate: 0 9%;
+          scale: 1.1;
+        }
+      }
+
+      .hero-parallax {
+        animation: hero-parallax linear both;
+        animation-timeline: view();
+        animation-range: exit 0% exit 100%;
+      }
+      /* translate only — the entrance already owns opacity and transform on
+         these elements, and an animation on the same property beats the
+         transition rather than composing with it. */
+      @keyframes hero-parallax {
+        to {
+          translate: 0 -3rem;
+        }
+      }
+
+      .hero-parallax-slow {
+        animation: hero-parallax-slow linear both;
+        animation-timeline: view();
+        animation-range: exit 0% exit 100%;
+      }
+      @keyframes hero-parallax-slow {
+        to {
+          translate: 0 -1.1rem;
+        }
+      }
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .hero-sweep,
+    .telemetry-led,
+    .flow-line,
+    .flow-node,
+    .level-fill,
+    .panel-scan {
+      animation: none;
+    }
+    .hero-heat {
+      display: none;
+    }
+    .btn-flame::before {
+      display: none;
+    }
+    .btn:active {
+      transform: none;
+    }
+  }
+}

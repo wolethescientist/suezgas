@@ -44,6 +44,13 @@ export default function SafetyPage() {
         eyebrow="LPG safety"
         lines={["Gas is safe.", "Bad fittings", "are not."]}
         lede="Almost every domestic gas incident traces back to a perished hose, a wrong regulator or a cylinder stored somewhere it should not be. All three are preventable in about ten minutes."
+        stamp="SU-GAS / 05 · Field protocol"
+        telemetry={[
+          { label: "Checks per delivery", value: "03" },
+          { label: "Hose life", value: "2", unit: "years" },
+          { label: "Leak test", value: "Soapy water" },
+          { label: "Safety line", value: "Open", live: true },
+        ]}
         aside={
           <div className="border-l border-bone-line pl-6">
             <div className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-bone-muted">

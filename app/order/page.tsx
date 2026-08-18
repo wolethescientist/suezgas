@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Burner, Contours } from "@/components/texture";
-import { Reveal, WipeLines } from "@/components/reveal";
+import { Reveal, WipeWords } from "@/components/reveal";
+import { HeroCanvas, HeroTelemetry } from "@/components/hero-canvas";
 
 export const metadata: Metadata = {
   title: "Order gas",
@@ -17,11 +18,14 @@ const STEPS = [
 export default function OrderPage() {
   return (
     <>
-      <section className="relative overflow-hidden border-b border-bone-line pb-16 pt-36 sm:pt-44">
-        <Contours origin={{ x: 94, y: 26 }} rings={24} opacity={0.6} />
+      <HeroCanvas
+        stamp="SU-GAS / 07 · Dispatch"
+        className="border-b border-bone-line pb-16 pt-36 sm:pt-44"
+      >
+        <Contours origin={{ x: 94, y: 26 }} rings={24} opacity={0.6} depth />
         <div className="bloom" />
         <Reveal className="measure relative" immediate>
-          <div className="reveal max-w-3xl">
+          <div className="reveal hero-parallax max-w-3xl">
             <div className="eyebrow" style={{ "--i": 0 } as React.CSSProperties}>
               Order gas
             </div>
@@ -29,7 +33,7 @@ export default function OrderPage() {
               className="mt-7 text-display-l"
               style={{ "--i": 1 } as React.CSSProperties}
             >
-              <WipeLines lines={["Tell us the size."]} />
+              <WipeWords lines={["Tell us the size."]} />
             </h1>
             <p
               className="mt-8 max-w-xl text-body-l text-fg-bone-muted"
@@ -41,7 +45,22 @@ export default function OrderPage() {
             </p>
           </div>
         </Reveal>
-      </section>
+
+        <Reveal className="measure relative mt-14">
+          <div className="reveal">
+            <div style={{ "--i": 0 } as React.CSSProperties}>
+              <HeroTelemetry
+                items={[
+                  { label: "Steps to delivery", value: "03" },
+                  { label: "Charged on this form", value: "₦0" },
+                  { label: "Weighed at", value: "Your door" },
+                  { label: "Taking orders", value: "Now", live: true },
+                ]}
+              />
+            </div>
+          </div>
+        </Reveal>
+      </HeroCanvas>
 
       {/* Three-step strip (ink) */}
       <section className="on-ink relative overflow-hidden py-14">

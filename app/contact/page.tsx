@@ -36,6 +36,13 @@ export default function ContactPage() {
         eyebrow="Contact"
         lines={["Questions?", "Ask a person."]}
         lede="Requests, complaints and feedback all reach the same team. If a delivery went wrong, say so and we will fix it rather than file it."
+        stamp="SU-GAS / 06 · Channels"
+        telemetry={[
+          { label: "Channels", value: "03" },
+          { label: "Office hours", value: "Mon–Sat" },
+          { label: "Base", value: "Wuse II" },
+          { label: "Line", value: "Answering", live: true },
+        ]}
       />
 
       <section className="relative overflow-hidden py-20 lg:py-28">
