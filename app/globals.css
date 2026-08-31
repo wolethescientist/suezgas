@@ -1411,3 +1411,42 @@
     }
   }
 }
+
+@layer utilities {
+  /* ---------- App section: the phone's two screens ----------
+     Cross-fade between placing an order and tracking it. Same timing as the
+     sister site, so the two products feel like one company. */
+  .phone-screen {
+    animation-duration: 9s;
+    animation-iteration-count: infinite;
+    animation-timing-function: var(--ease-out-expo);
+  }
+  .phone-screen-a {
+    animation-name: phone-a;
+  }
+  .phone-screen-b {
+    animation-name: phone-b;
+  }
+
+  /* Each screen holds for ~3.5s, then hands over. The outgoing state lifts
+     slightly and the incoming one settles — a state change, not a slideshow. */
+  @keyframes phone-a {
+    0%, 40% { opacity: 1; transform: translate3d(0, 0, 0); }
+    48%, 92% { opacity: 0; transform: translate3d(0, -1rem, 0); }
+    100% { opacity: 1; transform: translate3d(0, 0, 0); }
+  }
+  @keyframes phone-b {
+    0%, 40% { opacity: 0; transform: translate3d(0, 1rem, 0); }
+    48%, 92% { opacity: 1; transform: translate3d(0, 0, 0); }
+    100% { opacity: 0; transform: translate3d(0, 1rem, 0); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .phone-screen {
+      animation: none;
+    }
+    .phone-screen-b {
+      opacity: 0;
+    }
+  }
+}

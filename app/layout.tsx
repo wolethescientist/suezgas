@@ -9,7 +9,7 @@ import { LocalBusinessSchema, OrganizationSchema } from "@/components/structured
 import { SITE } from "@/lib/site";
 
 // Display (Zodiak) and body (Switzer) load from Fontshare in globals.css.
-// Mono is reserved for real data — weights, prices, cylinder sizes.
+// Mono is reserved for real data — weights, volumes, dates.
 const mono = IBM_Plex_Mono({
   subsets: ["latin"],
   weight: ["400", "500"],
@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Suez Gas Nigeria - LPG supply, storage and haulage",
     description:
-      "LPG supply, storage planning, bulk haulage and cylinder distribution for homes, estates, hospitality, food production and industrial operations.",
+      "Bulk LPG supply, road tanker haulage, storage planning and plant installation for off-takers, hospitality, food production and industrial operations.",
     type: "website",
     locale: "en_NG",
     siteName: SITE.name,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Suez Gas Nigeria - LPG supply, storage and haulage",
     description:
-      "LPG supply, storage planning, bulk haulage and cylinder distribution across Nigeria since 2012.",
+      "Bulk LPG supply, road tanker haulage and storage planning across Nigeria since 2012.",
   },
   other: {
     "geo.region": "NG-FC",

@@ -49,7 +49,7 @@ export default function SafetyPage() {
       <PageHero
         eyebrow="LPG safety"
         lines={["Gas is safe.", "Bad fittings", "are not."]}
-        lede="Almost every domestic gas incident traces back to a perished hose, a wrong regulator or a cylinder stored somewhere it should not be. All three are preventable in about ten minutes."
+        lede="Almost every gas incident traces back to a perished hose, a wrong regulator or a cylinder stored somewhere it should not be. All three are preventable in about ten minutes. This page is here whether or not you buy from us."
         stamp="SU-GAS / 05 · Field protocol"
         telemetry={[
           { label: "Checks per delivery", value: "03" },
@@ -81,29 +81,29 @@ export default function SafetyPage() {
         <Contours origin={{ x: -8, y: 45 }} rings={22} tone="ink" opacity={0.55} />
         <Reveal className="measure relative">
           <SectionHead
-            eyebrow="On every delivery"
-            title="What our driver checks before leaving."
+            eyebrow="On every bulk delivery"
+            title="What our crew checks before leaving site."
             note="Field staff carry safety equipment as standard"
           />
           <Reveal className="reveal mt-14">
-            <NumberedRow index={1} title="Cylinder condition" meta="We refuse unsafe cylinders">
+            <NumberedRow index={1} title="Vessel and site condition" meta="We will refuse an unsafe fill">
               <p>
-                Body for pitting and deep rust, foot ring for damage, valve
-                thread for wear. A cylinder that fails this does not get refilled
-                — it gets swapped.
+                Tank condition, ullage, relief valve and the standoff around the
+                fill point. If a vessel or its siting fails this check it does
+                not get filled, whatever the schedule says.
               </p>
             </NumberedRow>
-            <NumberedRow index={2} title="Weight, in front of you" meta="Digital scale on every vehicle">
+            <NumberedRow index={2} title="Metered, and documented" meta="Reading witnessed at handover">
               <p>
-                The filled cylinder is weighed where you can see the reading. You
-                pay for the kilograms shown, not for the size printed on the
-                collar.
+                The transfer is metered and the reading witnessed and signed for
+                on site. What was ordered, what arrived and what it measured are
+                all on the same piece of paper.
               </p>
             </NumberedRow>
-            <NumberedRow index={3} title="Connection and leak test" meta="Soapy-water test on completion">
+            <NumberedRow index={3} title="Connection and leak test" meta="Tested on completion">
               <p>
-                Regulator seated correctly, hose sound and in date, joint tested.
-                If the hose is perished we will say so and offer a replacement
+                Coupling seated correctly, hose sound and in date, joints tested
+                before the truck moves. If a component is past its life we say so
                 rather than reconnect it.
               </p>
             </NumberedRow>
@@ -111,7 +111,7 @@ export default function SafetyPage() {
         </Reveal>
       </section>
 
-      {/* Household guidance */}
+      {/* Guidance for anyone using LPG */}
       <section className="relative overflow-hidden border-b border-bone-line py-20 lg:py-28">
         <Burner className="pointer-events-none absolute -right-44 top-1/3 h-[32rem] w-[32rem] opacity-25" />
         <Reveal className="measure relative">
@@ -147,13 +147,13 @@ export default function SafetyPage() {
               Want the whole installation checked?
             </h2>
             <p className="mt-5 max-w-md text-fg-bone-muted">
-              We will inspect the regulator, hose and connections when we
-              deliver. Ask when you place the order.
+              Installation and system checks are a service we quote for —
+              storage, regulators, manifolds and appliance connections.
             </p>
           </div>
           <div className="flex flex-wrap gap-3">
-            <Link href="/order" className="btn btn-flame">
-              Order with a safety check
+            <Link href="/contact" className="btn btn-flame">
+              Talk to our team
             </Link>
             <Link href="/services#installation" className="btn btn-ghost">
               Installation

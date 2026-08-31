@@ -9,7 +9,6 @@ import { SITE } from "@/lib/site";
 const NAV = [
   { href: "/about", label: "About" },
   { href: "/services", label: "Services" },
-  { href: "/pricing", label: "Pricing" },
   { href: "/safety", label: "Safety" },
   { href: "/contact", label: "Contact" },
 ];
@@ -147,8 +146,8 @@ export function SiteHeader() {
             >
               0816 800 3677
             </a>
-            <Link href="/order" className="btn btn-flame hidden sm:inline-flex">
-              Order gas
+            <Link href="/#app" className="btn btn-flame hidden sm:inline-flex">
+              Get the app
             </Link>
 
             <button
@@ -200,8 +199,8 @@ export function SiteHeader() {
               </Link>
             ))}
             <div className="mt-5 flex gap-3">
-              <Link href="/order" className="btn btn-flame flex-1">
-                Order gas
+              <Link href="/#app" className="btn btn-flame flex-1">
+                Get the app
               </Link>
               <a href={SITE.phone.href} className="btn btn-ghost flex-1">
                 Call

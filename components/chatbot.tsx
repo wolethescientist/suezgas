@@ -11,37 +11,37 @@ type ChatMessage = {
 };
 
 const PRESET_QUESTIONS = [
+  "How do I buy gas?",
   "Do you supply commercial LPG?",
   "Can you plan storage for us?",
-  "How do I order gas?",
   "How do I stay safe?",
 ];
 
 const ANSWERS = [
   {
-    matches: ["order", "refill", "buy", "request", "delivery today"],
-    text: "To order, tell us your cylinder size and location through the order form. A customer care representative will confirm the price and delivery window before we dispatch.",
-    link: { href: "/order", label: "Start an order" },
+    matches: ["order", "refill", "buy", "app", "price", "cost", "how much", "delivery today", "purchase"],
+    text: "Gas is bought in the SuezElectric app — it is where the current price, your saved address and delivery tracking live. This website no longer takes orders or publishes a rate card, because LPG prices move and the app always has today's.",
+    link: { href: "/#app", label: "Get the app" },
   },
   {
-    matches: ["price", "cost", "how much", "kg", "kilogram", "size"],
-    text: "Our listed sizes run from 3 kg to 50 kg. LPG prices can change with the market, so the pricing page has the latest published rates and size guide.",
-    link: { href: "/pricing", label: "See current prices" },
+    matches: ["kg", "kilogram", "size", "cylinder size", "estate", "retail"],
+    text: "Suez Gas no longer sells retail — no cylinder refills, no doorstep deliveries. We supply LPG in bulk to off-takers, plants and commercial sites, and we plan and install storage. To buy gas as an individual, use the app.",
+    link: { href: "/#app", label: "Get the app" },
   },
   {
     matches: ["commercial", "industrial", "bulk", "tanker", "off-taker", "plant", "business"],
-    text: "Yes. We supply LPG beyond household refills, including bulk haulage to off-takers and industrial sites. We can scope the right route around your consumption, storage and schedule.",
+    text: "Yes — bulk is what we do. Haulage to off-takers, plants and industrial sites is arranged with our supply team, scoped around your volume, route and schedule.",
     link: { href: "/services#haulage", label: "See bulk haulage" },
   },
   {
-    matches: ["storage", "tank", "siting", "capacity", "plan storage", "installation"],
-    text: "We help organisations think through storage capacity, siting, refill cycles and installation before the system is put into use.",
+    matches: ["storage", "tank", "siting", "capacity", "plan storage", "installation", "install"],
+    text: "We help organisations think through storage capacity, siting, refill cycles and installation before the system is put into use. That starts with a conversation, not a form.",
     link: { href: "/services#consultancy", label: "Explore supply planning" },
   },
   {
-    matches: ["where", "area", "location", "abuja", "deliver", "delivery"],
-    text: "We deliver across the Abuja metropolis and surrounding estates. For commercial supply, bulk haulage and installation, our services page has the right starting point.",
-    link: { href: "/services", label: "Explore delivery services" },
+    matches: ["where", "area", "location", "abuja", "deliver"],
+    text: "We are based in Wuse II, Abuja and move bulk LPG by road to off-takers and sites. Individual purchases are made in the app; bulk supply, storage planning and installation are arranged with our team.",
+    link: { href: "/services", label: "Explore our services" },
   },
   {
     matches: ["safe", "safety", "leak", "smell gas", "hose", "regulator", "rust"],
@@ -49,7 +49,7 @@ const ANSWERS = [
     link: { href: "/safety", label: "Read the safety guide" },
   },
   {
-    matches: ["call", "whatsapp", "contact", "phone", "human", "person"],
+    matches: ["call", "whatsapp", "contact", "phone", "human", "person", "complaint"],
     text: "You can reach the customer care team on 0816 800 3677 by call or WhatsApp. We answer requests, complaints and delivery questions.",
     link: { href: "/contact", label: "Contact the team" },
   },
@@ -63,7 +63,7 @@ function getAnswer(question: string) {
 
   return (
     match ?? {
-      text: "I can help with commercial LPG, storage planning, orders, delivery areas and safety. Choose a suggested question, or contact the supply team for a specific request.",
+      text: "I can help with buying gas in the app, commercial LPG, storage planning, delivery areas and safety. Choose a suggested question, or contact the supply team for a specific request.",
       link: { href: "/contact", label: "Speak with customer care" },
     }
   );
@@ -76,7 +76,7 @@ export function Chatbot() {
     {
       id: 0,
       from: "bot",
-      text: "Hello. I can help with commercial LPG, storage planning, orders, delivery and safety.",
+      text: "Hello. Gas is bought in our app — ask me how, or about commercial supply, storage planning and safety.",
     },
   ]);
 

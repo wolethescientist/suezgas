@@ -9,16 +9,16 @@ export const metadata: Metadata = {
   alternates: { canonical: "/privacy" },
   title: "Privacy",
   description:
-    "What Suez Gas Nigeria does with the name, phone number and address you give us when you order gas or send a message.",
+    "What Suez Gas Nigeria does with the name, phone number and email address you give us when you send a message through this website.",
 };
 
 const SECTIONS: [string, string[]][] = [
   [
     "What we collect",
     [
-      "When you use the order form it composes an email containing your name, phone number, delivery address, the product and size you asked for, your preferred delivery window and anything you type in the notes. Your email address is optional.",
       "When you use the contact form it composes an email containing your name, phone number, email address, the type of request and the message itself.",
-      "In both cases the message is written into your own email app. You can read it, change it or discard it before it is ever sent.",
+      "The message is written into your own email app. You can read it, change it or discard it before it is ever sent.",
+      "This website does not sell gas and takes no orders, so it never asks for a delivery address or payment details. Buying happens in the SuezElectric app, which has its own privacy notice on the app stores.",
     ],
   ],
   [
@@ -39,7 +39,7 @@ const SECTIONS: [string, string[]][] = [
   [
     "How long we keep it",
     [
-      "Order records are kept for as long as we need them for supply history, safety records and tax obligations. Enquiries that do not become orders are cleared from the inbox once they are dealt with.",
+      "Correspondence is kept for as long as we need it for supply history, safety records and tax obligations. Enquiries that come to nothing are cleared from the inbox once they are dealt with.",
     ],
   ],
   [
@@ -58,7 +58,7 @@ export default function PrivacyPage() {
       <PageHero
         eyebrow="Privacy"
         lines={["Your details,", "and nothing more."]}
-        lede="We ask for the least we need to get a cylinder to your door. This page says exactly what that is and where it goes."
+        lede="This website takes no orders and no payments. The only details it ever handles are the ones you type into the contact form — this page says exactly what happens to them."
         stamp="SU-GAS / 08 · Notice"
       />
 

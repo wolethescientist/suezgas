@@ -4,7 +4,6 @@ import { useEffect, useMemo, useState } from "react";
 import type { GasMarket } from "@/app/api/gas-prices/route";
 
 const INITIAL_MARKETS: GasMarket[] = [
-  { id: "ng", region: "Nigeria", market: "Suez Gas · local LPG", value: 16000, unit: "3 kg refill", currency: "NGN", change: 0, date: "2026-07-29", live: false },
   { id: "us", region: "United States", market: "Henry Hub", value: 3.1, unit: "USD / MMBtu", currency: "USD", change: 1.8, date: "2026-07-20", live: false },
   { id: "eu", region: "Europe", market: "TTF day-ahead", value: 32.4, unit: "EUR / MWh", currency: "EUR", change: -0.9, date: "2026-07-24", live: false },
   { id: "asia", region: "Asia Pacific", market: "LNG import reference", value: 11.8, unit: "USD / MMBtu", currency: "USD", change: 2.4, date: "2026-07-24", live: false },
@@ -86,7 +85,7 @@ export function GlobalGasTicker() {
       </button>
 
       <p className="sr-only">
-        Benchmarks are not like-for-like household refill prices. They are shown in each market&rsquo;s published unit; Suez Gas confirms your local LPG price per cylinder before delivery.
+        International benchmarks, shown in each market&rsquo;s published unit. They are reference prices for the trade, not a retail rate for any Suez Gas product.
       </p>
     </section>
   );

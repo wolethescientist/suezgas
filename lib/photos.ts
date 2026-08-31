@@ -64,17 +64,6 @@ export const PHOTOS: Photo[] = [
     credit: "Library photograph · Pexels",
   },
   {
-    id: "cylinders",
-    file: "cylinders.jpg",
-    width: 1600,
-    height: 1067,
-    alt: "Rows of LPG cylinders racked and secured on the bed of a distribution vehicle.",
-    caption:
-      "Cylinder distribution runs on a refill cycle: racked, secured, delivered, and weighed at the door.",
-    meta: "Cylinder distribution",
-    credit: "Library photograph · Pexels",
-  },
-  {
     id: "terminal",
     file: "terminal.jpg",
     width: 1600,
@@ -86,19 +75,42 @@ export const PHOTOS: Photo[] = [
     credit: "Library photograph · Pexels",
   },
 
-  /* ── Not yet shot. These stay null until real files exist — see the README.
-     The weighing shot is the highest-value photograph on the whole site: it is
-     the only one that can evidence a claim the site makes in three places. */
   {
-    id: "weighing",
-    file: null,
-    width: 1600,
-    height: 1200,
-    alt: "A Suez Gas driver weighing a customer's cylinder on a digital scale at the point of delivery.",
+    id: "filling",
+    file: "filling.jpg",
+    width: 2000,
+    height: 1124,
+    alt: "A technician in full protective coverall and respirator working at the valve gear of bulk LPG storage vessels.",
     caption:
-      "Every cylinder is weighed in front of the customer, on a digital scale carried on the vehicle.",
-    meta: "Measured delivery",
+      "LPG is only as safe as the people handling it. Full protective equipment is not optional at the tank.",
+    meta: "At the plant",
+    credit: "Library photograph · Pexels",
   },
+  {
+    id: "installation",
+    file: "installation.jpg",
+    width: 2000,
+    height: 1334,
+    alt: "Gloved hands fitting valves and fittings onto a pipework manifold.",
+    caption:
+      "Most gas incidents trace back to a fitting, not the fuel. Installation is where safety is actually decided.",
+    meta: "Installation",
+    credit: "Library photograph · Pexels",
+  },
+  {
+    id: "kitchen",
+    file: "kitchen.jpg",
+    width: 2000,
+    height: 1334,
+    alt: "A chef working over a lit gas burner in a busy commercial kitchen, flame visible under the pan.",
+    caption:
+      "A kitchen that runs on gas cannot afford to run out mid-service. That is a supply problem before it is a cooking one.",
+    meta: "Hospitality & food",
+    credit: "Library photograph · Pexels",
+  },
+
+  /* Nothing here is Suez Gas equipment yet. The README carries the shot list;
+     the highest-value one is a road tanker of theirs, working. */
 ];
 
 /** Only the entries that have a real file behind them. */

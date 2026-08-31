@@ -4,18 +4,19 @@ import { Burner, Contours } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
 import { PageHero, PullQuote, SectionHead, StatRow } from "@/components/page-parts";
 import { BreadcrumbSchema } from "@/components/structured-data";
+import { FeaturePhoto } from "@/components/photo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/about" },
   title: "About us",
   description:
-    "Suez Gas Nigeria Limited (RC 1076785) has supplied commercial, industrial and residential LPG from Wuse II, Abuja since 2012. Part of the Suez energy group.",
+    "Suez Gas Nigeria Limited (RC 1076785) has supplied bulk commercial and industrial LPG from Wuse II, Abuja since 2012. Part of the Suez energy group.",
 };
 
 const GROUP = [
   [
     "Suez Gas Nigeria",
-    "LPG supply for homes, estates, hospitality, food production and industrial operations.",
+    "Bulk LPG supply for off-takers, hospitality, food production and industrial operations.",
     "This company",
   ],
   [
@@ -37,7 +38,7 @@ export default function AboutPage() {
       <PageHero
         eyebrow="RC 1076785 · Wuse II, Abuja"
         lines={["An independent", "energy supplier."]}
-        lede="We specialise in LPG supply for industrial, commercial and residential use, from cylinder distribution and road tanker haulage to storage planning and plant installation."
+        lede="We specialise in bulk LPG for industrial and commercial use — road tanker haulage, storage planning and plant installation. Individual purchases are handled in the group app."
         stamp="SU-GAS / 02 · RC 1076785"
         telemetry={[
           { label: "Incorporated", value: "2012" },
@@ -75,14 +76,14 @@ export default function AboutPage() {
               </PullQuote>
             </div>
             <p
-              className="mt-9 max-w-2xl text-body-l text-fg-ink-muted"
+              className="mt-14 max-w-2xl text-body-l text-fg-ink-muted"
               style={{ "--i": 1 } as React.CSSProperties}
             >
               We are committed to reliable service and innovative energy
               solutions, while continuously working to reduce our impact on the
               environment. We understand what quality product means in this
-              trade, and we price competitively alongside a delivery service we
-              are willing to be judged on.
+              trade, and we stand behind a delivery service we are willing to be
+              judged on.
             </p>
           </div>
         </Reveal>
@@ -94,15 +95,15 @@ export default function AboutPage() {
         <Reveal className="measure relative">
           <SectionHead
             eyebrow="Who we serve"
-            title="One cylinder or a plant room."
-            note="Residential / commercial / industrial"
+            title="A plant room, not a kitchen."
+            note="Off-takers / commercial / industrial"
           />
 
           <Reveal className="reveal mt-14 grid gap-x-14 gap-y-10 md:grid-cols-2">
             {[
               [
-                "Homes and estates",
-                "Individual households and whole estates on a scheduled refill round, with cylinder pick-up and return.",
+                "Off-takers and resellers",
+                "Businesses buying LPG in volume to move on, supplied by road tanker on a contracted route and schedule.",
               ],
               [
                 "Hospitality",
@@ -127,6 +128,12 @@ export default function AboutPage() {
               </div>
             ))}
           </Reveal>
+
+          <Reveal className="reveal mt-16">
+            <div style={{ "--i": 0 } as React.CSSProperties}>
+              <FeaturePhoto id="kitchen" />
+            </div>
+          </Reveal>
         </Reveal>
       </section>
 
@@ -137,7 +144,7 @@ export default function AboutPage() {
           <SectionHead
             eyebrow="The group"
             title="Three companies behind the supply."
-            note="Import, haulage, domestic distribution and electricity"
+            note="Import, haulage, distribution and electricity"
           />
           <Reveal className="reveal mt-14">
             {GROUP.map(([name, body, tag], i) => (
@@ -162,7 +169,7 @@ export default function AboutPage() {
               items={[
                 { label: "Incorporated", value: "2012" },
                 { label: "Base", value: "Wuse II" },
-                { label: "Cylinder range", value: "3-50 kg" },
+                { label: "Bulk mode", value: "Road tanker" },
                 { label: "Group companies", value: "3" },
               ]}
             />
@@ -177,11 +184,11 @@ export default function AboutPage() {
             Need LPG at a larger scale?
           </h2>
           <div className="flex flex-wrap gap-3">
-            <Link href="/order" className="btn btn-flame">
-              Order gas
+            <Link href="/contact" className="btn btn-flame">
+              Talk to our supply team
             </Link>
-            <Link href="/contact" className="btn btn-ghost">
-              Contact us
+            <Link href="/#app" className="btn btn-ghost">
+              Get the app
             </Link>
           </div>
         </Reveal>

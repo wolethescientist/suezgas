@@ -14,17 +14,6 @@ export type GasMarket = {
 
 const REFERENCE_MARKETS: GasMarket[] = [
   {
-    id: "ng",
-    region: "Nigeria",
-    market: "Suez Gas · local LPG",
-    value: 16000,
-    unit: "3 kg refill",
-    currency: "NGN",
-    change: 0,
-    date: "2026-07-29",
-    live: false,
-  },
-  {
     id: "uk",
     region: "United Kingdom",
     market: "NBP reference",
@@ -87,13 +76,13 @@ export async function GET() {
     );
 
     return NextResponse.json({
-      markets: [REFERENCE_MARKETS[0], ...liveMarkets, REFERENCE_MARKETS[1]],
+      markets: [...liveMarkets, ...REFERENCE_MARKETS],
       source: "free-api",
       updatedAt: new Date().toISOString(),
     });
   } catch {
     return NextResponse.json({
-      markets: [REFERENCE_MARKETS[0], ...REFERENCE_MARKETS.slice(1)],
+      markets: REFERENCE_MARKETS,
       source: "reference",
       updatedAt: new Date().toISOString(),
     });

@@ -4,6 +4,7 @@ import { Burner, Contours } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
 import { PageHero, SectionHead } from "@/components/page-parts";
 import { BreadcrumbSchema } from "@/components/structured-data";
+import { FeaturePhoto } from "@/components/photo";
 
 export const metadata: Metadata = {
   alternates: { canonical: "/services" },
@@ -14,27 +15,12 @@ export const metadata: Metadata = {
 
 const SERVICES = [
   {
-    id: "delivery",
-    tag: "Cylinder distribution",
-    title: "Cylinder delivery",
-    lede: "Personalised cylinder pick-up and delivery to your doorstep, on our own vehicles.",
-    body: [
-      "Whatever your LPG requirement, we build the delivery around the reality of your home, estate or organisation, with reliable and safe service you can plan around.",
-      "Fast and efficient delivery schedules, experienced drivers who take the utmost care on your property, and competitive prices. We collect the empty cylinder and return it filled.",
-    ],
-    facts: [
-      ["Sizes", "3-50 kg"],
-      ["Window", "Same day"],
-      ["Weighing", "Digital scale at your door"],
-    ],
-  },
-  {
     id: "haulage",
     tag: "Bulk haulage",
     title: "Gas haulage",
     lede: "Bulk LPG moved by road to off-takers, plants and industrial sites.",
     body: [
-      "Through Suez Trading International the group imports LPG and distributes it to off-takers in trucks. That upstream position is what keeps our per-kilogram price competitive downstream.",
+      "Through Suez Trading International the group imports LPG and distributes it to off-takers in trucks. That upstream position is what keeps supply steady downstream.",
       "Haulage is contracted by volume and route, with scheduling agreed in advance so a plant never runs to the bottom of its tank.",
     ],
     facts: [
@@ -42,6 +28,7 @@ const SERVICES = [
       ["Contracting", "By volume & route"],
       ["Scheduling", "Agreed in advance"],
     ],
+    cta: { href: "/contact", label: "Talk to our supply team" },
   },
   {
     id: "installation",
@@ -49,14 +36,16 @@ const SERVICES = [
     title: "Professional installation",
     lede: "Storage, regulators, hoses, manifolds and appliance connections, fitted properly.",
     body: [
-      "Most domestic gas incidents trace back to a bad connection, a perished hose or a regulator that was never right for the appliance. Installation is where safety is actually decided.",
+      "Most gas incidents trace back to a bad connection, a perished hose or a regulator that was never right for the appliance. Installation is where safety is actually decided.",
       "Our field staff are equipped and trained for the work, and we will tell you plainly when a component needs replacing rather than reconnecting.",
     ],
     facts: [
-      ["Covers", "Domestic & commercial"],
+      ["Covers", "Estates & commercial"],
       ["Includes", "Leak test on completion"],
       ["Parts", "Regulators, hoses, manifolds"],
     ],
+    cta: { href: "/contact", label: "Arrange an installation" },
+    photo: "installation",
   },
   {
     id: "consultancy",
@@ -72,6 +61,7 @@ const SERVICES = [
       ["Scope", "Sizing, siting, specification"],
       ["Also", "Gas utilisation projects"],
     ],
+    cta: { href: "/contact", label: "Start a conversation" },
   },
 ];
 
@@ -81,12 +71,12 @@ export default function ServicesPage() {
       <BreadcrumbSchema trail={[["Services", "/services"]]} />
       <PageHero
         eyebrow="What we do"
-        lines={["One supply chain,", "four ways in."]}
-        lede="Storage planning, bulk haulage, cylinder distribution and installation from people who move LPG into the places where work happens."
+        lines={["One supply chain,", "three ways in."]}
+        lede="Bulk haulage, storage planning and plant installation for off-takers, plants and commercial sites. Individual purchases happen in the app, not here."
         stamp="SU-GAS / 03 · Service lines"
         telemetry={[
-          { label: "Service lines", value: "04" },
-          { label: "Cylinder range", value: "3–50", unit: "kg" },
+          { label: "Service lines", value: "03" },
+          { label: "Supplied to", value: "Off-takers" },
           { label: "Bulk mode", value: "Road tanker" },
           { label: "Scheduling", value: "Agreed", live: true },
         ]}
@@ -133,8 +123,8 @@ export default function ServicesPage() {
                     </p>
                   ))}
                   <div className="mt-9 flex flex-wrap gap-3">
-                    <Link href="/order" className="btn btn-flame">
-                      Request this service
+                    <Link href={s.cta.href} className="btn btn-flame">
+                      {s.cta.label}
                     </Link>
                   </div>
                 </div>
@@ -154,6 +144,13 @@ export default function ServicesPage() {
                   ))}
                 </dl>
               </Reveal>
+              {s.photo && (
+                <Reveal className="reveal mt-16">
+                  <div style={{ "--i": 0 } as React.CSSProperties}>
+                    <FeaturePhoto id={s.photo} tone={ink ? "ink" : "bone"} />
+                  </div>
+                </Reveal>
+              )}
             </Reveal>
           </section>
         );

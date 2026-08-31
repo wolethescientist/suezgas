@@ -107,8 +107,7 @@ export function LocalBusinessSchema() {
         ],
         areaServed: SITE.areaServed.map((name) => ({ "@type": "Place", name })),
         makesOffer: [
-          "LPG cylinder refill",
-          "Cylinder and regulator supply",
+          "Bulk LPG supply",
           "Bulk LPG haulage",
           "LPG storage planning and installation",
         ].map((name) => ({

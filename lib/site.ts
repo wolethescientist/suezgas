@@ -14,7 +14,7 @@ export const SITE = {
   founded: "2012",
   tagline: "Providing your convenient energy",
   description:
-    "Commercial, industrial and residential LPG supply in Nigeria since 2012. Storage planning, bulk haulage, cylinder distribution, installation and consultancy from the Suez energy group.",
+    "Bulk commercial and industrial LPG supply in Nigeria since 2012. Road tanker haulage, storage planning, plant installation and consultancy from the Suez energy group.",
 
   phone: {
     e164: "+2348168003677",
@@ -60,11 +60,22 @@ export const SITE = {
     facebook: "https://www.facebook.com/suezgasnigeria/",
   },
 
+  /**
+   * Buying moved off this website and into the group app. Retail ordering and
+   * the published rate card were removed with it — the site informs, the app
+   * transacts, and nothing here should read as a place to make a purchase.
+   *
+   * These are the live SuezElectric listings: gas and electricity are sold
+   * through the one group app rather than two.
+   */
+  app: {
+    name: "SuezElectric",
+    ios: "https://apps.apple.com/us/app/suezelectric/id1543156442",
+    android: "https://play.google.com/store/apps/details?id=com.suezElectric.suez",
+  },
+
   group: [
     { name: "SuezElectric", note: "Prepaid electricity", href: "https://suezelectric.com" },
     { name: "Suez Trading International", note: "LPG import & bulk haulage" },
   ],
 } as const;
-
-/** Cylinder sizes we stock, used by the order form and the product schema. */
-export const CYLINDER_SIZES = ["3", "6", "12.5", "25", "50"] as const;

@@ -14,12 +14,12 @@ const COLUMNS = [
     ],
   },
   {
-    title: "Order",
+    title: "What we do",
     links: [
-      { href: "/order", label: "Order gas" },
-      { href: "/pricing", label: "Pricing" },
-      { href: "/services#haulage", label: "Bulk haulage" },
+      { href: "/services#haulage", label: "Bulk supply" },
+      { href: "/services#consultancy", label: "Storage planning" },
       { href: "/services#installation", label: "Installation" },
+      { href: "/services#consultancy", label: "Supply planning" },
     ],
   },
 ];
@@ -37,7 +37,7 @@ export function SiteFooter() {
       <div className="relative border-b border-ink-line">
         <div className="measure grid grid-cols-2 divide-ink-line md:grid-cols-4 md:divide-x">
           {[
-            ["Supply modes", "Cylinder + bulk"],
+            ["Supply mode", "Bulk & haulage"],
             ["Bulk movement", "Road tanker"],
             ["Every drop", "Digitally weighed"],
             ["Supplying since", "2012"],
@@ -61,7 +61,7 @@ export function SiteFooter() {
         <div>
           <div className="eyebrow">Suez Energy Group</div>
           <p className="mt-6 max-w-sm font-display text-[1.625rem] leading-[1.15] sm:text-[2rem]">
-            LPG supply for homes, estates, hotels, bakeries and industrial sites since 2012.
+            Bulk LPG for off-takers, hotels, bakeries and industrial sites since 2012.
           </p>
 
           <address className="mt-9 space-y-3 not-italic">
@@ -80,6 +80,19 @@ export function SiteFooter() {
               value="20 Alexandria Crescent, Wuse II, Abuja"
             />
           </address>
+
+          <div className="mt-9 border-t border-ink-line pt-7">
+            <div className="text-[0.6875rem] uppercase tracking-[0.09em] text-fg-ink-muted">
+              Buy gas
+            </div>
+            <p className="mt-2 max-w-xs text-[0.9375rem] text-fg-ink-muted">
+              We supply in bulk, not retail. To buy gas as an individual, the
+              {" "}{SITE.app.name} app is the place.
+            </p>
+            <Link href="/#app" className="btn btn-flame mt-4">
+              Get the app
+            </Link>
+          </div>
 
           <div className="mt-9 flex gap-2">
             {SOCIALS.map((s) => (

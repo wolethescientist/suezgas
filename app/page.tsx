@@ -7,10 +7,11 @@ import { HeroCanvas, HeroTelemetry } from "@/components/hero-canvas";
 import { LpgInfrastructure } from "@/components/lpg-infrastructure";
 import { SocialMediaSection } from "@/components/social-media";
 import { ProofStrip } from "@/components/photo";
+import { AppDownloadSection } from "@/components/app-download";
 
 const SUPPLY_MODES = [
-  "Cylinder distribution",
-  "Bulk haulage",
+  "Bulk LPG supply",
+  "Road tanker haulage",
   "Storage planning",
   "Plant installation",
 ];
@@ -26,8 +27,8 @@ const SUPPLY_MODES = [
  */
 const HERO_TELEMETRY = [
   { label: "Supplying since", value: "2012" },
-  { label: "Cylinder range", value: "3–50", unit: "kg" },
-  { label: "Every delivery", value: "Weighed" },
+  { label: "Bulk movement", value: "Road tanker" },
+  { label: "Every handover", value: "Weighed" },
   { label: "Dispatch", value: "Live", live: true },
 ];
 
@@ -56,20 +57,20 @@ export default function HomePage() {
                 className="mt-9 max-w-lg text-body-l text-fg-bone-muted"
                 style={{ "--i": 3 } as React.CSSProperties}
               >
-                Storage, haulage and dependable LPG supply for estates,
-                hospitality, food production and industrial operations across
-                Nigeria.
+                Bulk LPG supply, road tanker haulage and storage planning for
+                off-takers, plants, hospitality, food production and industrial
+                operations across Nigeria.
               </p>
 
               <div
                 className="mt-10 flex flex-wrap items-center gap-3"
                 style={{ "--i": 4 } as React.CSSProperties}
               >
-                <Link href="/contact" className="btn btn-flame">
-                  Talk to our supply team
+                <Link href="/#app" className="btn btn-flame">
+                  Get the app
                 </Link>
-                <Link href="/services" className="btn btn-ghost">
-                  Explore capabilities
+                <Link href="/contact" className="btn btn-ghost">
+                  Talk to our supply team
                 </Link>
               </div>
             </div>
@@ -106,6 +107,8 @@ export default function HomePage() {
 
       <GlobalGasTicker />
 
+      <AppDownloadSection />
+
       {/* ───────────────────────── Supply chain (ink) ───────────────────────── */}
       <section className="on-ink relative overflow-hidden py-20 lg:py-28">
         <Contours origin={{ x: -8, y: 62 }} rings={22} tone="ink" opacity={0.55} />
@@ -113,7 +116,7 @@ export default function HomePage() {
           <SectionHead
             eyebrow="The supply chain"
             title="From landed LPG to the point of use."
-            note="Cylinder, tanker or plant supply"
+            note="Tanker, storage or plant supply"
           />
 
           <Reveal className="reveal mt-14">
@@ -123,11 +126,11 @@ export default function HomePage() {
                 requirement, location and the continuity you need from supply.
               </p>
             </NumberedRow>
-            <NumberedRow index={2} title="Move what is needed" meta="Road tanker or cylinder distribution">
+            <NumberedRow index={2} title="Move what is needed" meta="Road tanker to off-takers and sites">
               <p>
-                Bulk LPG moves by road to off-takers and sites. Cylinder
-                distribution covers homes, estates and businesses that need a
-                reliable refill cycle.
+                Bulk LPG moves by road to off-takers, plants and commercial
+                sites, contracted by volume and route. Individual purchases are
+                not part of this — those happen in the app.
               </p>
             </NumberedRow>
             <NumberedRow index={3} title="Deliver into operations" meta="Measured delivery and field support">
@@ -165,15 +168,15 @@ export default function HomePage() {
               ],
               [
                 "Measured delivery",
-                "Every cylinder delivery is weighed. Bulk movement is planned, documented and checked at handover.",
+                "Bulk movement is planned, metered, documented and checked at handover, so what was ordered is what arrives.",
               ],
               [
                 "Field-ready teams",
                 "Drivers and installers know the difference between moving LPG and leaving a safe working system behind.",
               ],
               [
-                "Domestic to industrial",
-                "Homes, estates, hotels, bakeries and industrial sites can work with one LPG partner as demand grows.",
+                "Off-taker to industrial",
+                "Off-takers, hotels, bakeries and industrial sites can work with one LPG partner as demand grows.",
               ],
             ].map(([title, body], i) => (
               <div
@@ -208,7 +211,7 @@ export default function HomePage() {
                   { label: "Supplying since", value: "2012" },
                   { label: "Registered", value: "RC 1076785" },
                   { label: "Service base", value: "Abuja · Wuse II" },
-                  { label: "Cylinder range", value: "3–50 kg" },
+                  { label: "Bulk movement", value: "Road tanker" },
                 ]}
               />
             </div>
@@ -233,14 +236,15 @@ export default function HomePage() {
               <p className="mt-7 max-w-lg text-body-l text-fg-ink-muted">
                 Tell us what you consume, where you operate and what continuity
                 looks like. We will point you to the right supply route.
+                Buying as an individual happens in the app instead.
               </p>
             </div>
             <div className="flex flex-wrap gap-3">
               <Link href="/contact" className="btn btn-flame">
                 Talk to supply team
               </Link>
-              <Link href="/order" className="btn btn-ghost">
-                Request delivery
+              <Link href="/#app" className="btn btn-ghost">
+                Get the app
               </Link>
             </div>
           </div>

@@ -8,8 +8,7 @@ import type { Row } from "@/lib/mailto";
 
 const TOPIC_LABELS: Record<string, string> = {
   enquiry: "General enquiry",
-  delivery: "Gas delivery",
-  shop: "Cylinders & hardware",
+  bulk: "Bulk supply",
   haulage: "Bulk haulage",
   installation: "Installation",
   complaint: "A delivery went wrong",
@@ -132,8 +131,7 @@ export function ContactForm() {
         <label htmlFor="c-topic">Type of request</label>
         <select id="c-topic" name="topic" defaultValue="enquiry">
           <option value="enquiry">General enquiry</option>
-          <option value="delivery">Gas delivery</option>
-          <option value="shop">Cylinders & hardware</option>
+            <option value="bulk">Bulk supply</option>
           <option value="haulage">Bulk haulage</option>
           <option value="installation">Installation</option>
           <option value="complaint">A delivery went wrong</option>
