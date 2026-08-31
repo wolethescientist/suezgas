@@ -20,11 +20,19 @@ export function Logo({
    * cut with that line removed rather than rendering it as mush.
    */
   compact = false,
+  sizes = "(max-width: 640px) 160px, 220px",
 }: {
   tone?: "bone" | "ink";
   className?: string;
   priority?: boolean;
   compact?: boolean;
+  /**
+   * Must be at least as wide as the largest place this renders. The old value
+   * claimed 260px for a lockup the footer was drawing at 672px, so Next served
+   * a 168px file into it — the source artwork is 416px and was never the
+   * problem. Nothing on the site now draws this above ~220px.
+   */
+  sizes?: string;
 }) {
   const src = compact
     ? tone === "ink"
@@ -40,7 +48,7 @@ export function Logo({
       alt="Suez Gas Nigeria"
       className={className}
       priority={priority}
-      sizes="(max-width: 640px) 150px, 260px"
+      sizes={sizes}
     />
   );
 }

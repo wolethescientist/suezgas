@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Burner, Contours } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
 import { PageHero } from "@/components/page-parts";
+import { ContactForm } from "@/components/contact-form";
+import { BreadcrumbSchema } from "@/components/structured-data";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/contact" },
   title: "Contact",
   description:
     "Call or WhatsApp +234 816 800 3677, email info@suezgas.com, or visit 20 Alexandria Crescent, Wuse II, Abuja.",
@@ -32,6 +35,7 @@ const CHANNELS = [
 export default function ContactPage() {
   return (
     <>
+      <BreadcrumbSchema trail={[["Contact", "/contact"]]} />
       <PageHero
         eyebrow="Contact"
         lines={["Questions?", "Ask a person."]}
@@ -82,57 +86,7 @@ export default function ContactPage() {
               <h2 className="text-display-m" style={{ "--i": 0 } as React.CSSProperties}>
                 Send a message.
               </h2>
-              <form className="mt-10 space-y-8" style={{ "--i": 1 } as React.CSSProperties}>
-                <div className="grid gap-8 sm:grid-cols-2">
-                  <p className="field">
-                    <label htmlFor="c-name">Full name</label>
-                    <input id="c-name" name="name" type="text" autoComplete="name" required />
-                  </p>
-                  <p className="field">
-                    <label htmlFor="c-phone">Phone</label>
-                    <input
-                      id="c-phone"
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      placeholder="080 0000 0000"
-                      required
-                    />
-                  </p>
-                </div>
-
-                <p className="field">
-                  <label htmlFor="c-email">Email</label>
-                  <input id="c-email" name="email" type="email" autoComplete="email" required />
-                </p>
-
-                <p className="field">
-                  <label htmlFor="c-topic">Type of request</label>
-                  <select id="c-topic" name="topic" defaultValue="enquiry">
-                    <option value="enquiry">General enquiry</option>
-                    <option value="delivery">Gas delivery</option>
-                    <option value="shop">Cylinders & hardware</option>
-                    <option value="haulage">Bulk haulage</option>
-                    <option value="installation">Installation</option>
-                    <option value="complaint">A delivery went wrong</option>
-                    <option value="other">Others</option>
-                  </select>
-                </p>
-
-                <p className="field">
-                  <label htmlFor="c-message">Message</label>
-                  <textarea id="c-message" name="message" required />
-                </p>
-
-                {/* ponytail: presentation only — wire to your mailer or a server action. */}
-                <button type="submit" className="btn btn-flame w-full sm:w-auto">
-                  Send message
-                </button>
-
-                <p className="text-[0.6875rem] uppercase tracking-[0.075em] text-fg-bone-muted">
-                  Urgent refills are faster on the phone line.
-                </p>
-              </form>
+              <ContactForm />
             </Reveal>
           </div>
         </Reveal>

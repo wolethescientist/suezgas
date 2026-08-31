@@ -1361,3 +1361,53 @@
     }
   }
 }
+
+@layer utilities {
+  /* ---------- Header shield ----------
+     The bar is a floating pill inset from the viewport edge, so there is a
+     12–20px sliver above and beside it that page content scrolls straight
+     through. This is the scrim that closes it: a short tone-matched fade,
+     faded in only once the page has actually moved. */
+  .header-scrim {
+    position: fixed;
+    inset-inline: 0;
+    top: 0;
+    z-index: 49;
+    /* Tall enough to clear the pill (which ends near 66px) and still have room
+       to fade out below it. */
+    height: 7.5rem;
+    pointer-events: none;
+    opacity: 0;
+    transition:
+      opacity 400ms var(--ease-out-expo),
+      background-image 500ms var(--ease-out-expo);
+    /* Fully opaque PAST the pill, then fade. Starting the fade at the first
+       stop left the top band at ~96% — enough for a line of body copy to
+       still show through above the bar. */
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-bone) 0%,
+      var(--color-bone) 58%,
+      rgb(242 237 228 / 0.5) 80%,
+      rgb(242 237 228 / 0) 100%
+    );
+  }
+  .header-scrim[data-tone="ink"] {
+    background-image: linear-gradient(
+      to bottom,
+      var(--color-ink) 0%,
+      var(--color-ink) 58%,
+      rgb(17 19 22 / 0.5) 80%,
+      rgb(17 19 22 / 0) 100%
+    );
+  }
+  .header-scrim[data-visible="true"] {
+    opacity: 1;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .header-scrim {
+      transition: none;
+    }
+  }
+}

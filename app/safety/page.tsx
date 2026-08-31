@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Burner, Contours } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
 import { NumberedRow, PageHero, SectionHead } from "@/components/page-parts";
+import { BreadcrumbSchema, FaqSchema } from "@/components/structured-data";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/safety" },
   title: "LPG safety",
   description:
     "How to store, check and handle LPG equipment safely, what to do if you smell gas, and the checks Suez Gas performs on every delivery.",
@@ -40,6 +42,10 @@ const CHECKS = [
 export default function SafetyPage() {
   return (
     <>
+      <BreadcrumbSchema trail={[["LPG safety", "/safety"]]} />
+      {/* CHECKS is rendered further down this page, so the schema and the
+          visible content can never drift apart. */}
+      <FaqSchema items={CHECKS} />
       <PageHero
         eyebrow="LPG safety"
         lines={["Gas is safe.", "Bad fittings", "are not."]}

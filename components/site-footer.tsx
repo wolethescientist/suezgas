@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { Contours, Burner } from "./texture";
 import { Logo } from "./logo";
+import { SITE } from "@/lib/site";
 
 const COLUMNS = [
   {
@@ -144,15 +145,39 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* Oversized lockup with the burner plate behind it */}
+      {/* ── End plate ──────────────────────────────────────────────────
+          The lockup used to be the 416px logo bitmap stretched past 670px,
+          which is the one genuinely soft thing on the site. The mark now sits
+          at a size its own pixels can carry, and the OVERSIZED element is the
+          company's tagline — set live in Zodiak, so it is sharp at any size and
+          finally legible. It reads as brand copy instead of the 8px mush it was
+          baked into the artwork at. */}
       <div className="relative border-t border-ink-line">
         <Burner
-          className="pointer-events-none absolute -top-24 right-[-7rem] h-[28rem] w-[28rem] opacity-40 sm:right-4"
+          className="pointer-events-none absolute -top-28 right-[-8rem] h-[30rem] w-[30rem] opacity-40 sm:right-2"
           stroke="#f58220"
           strokeOpacity={0.3}
         />
-        <div className="measure relative py-14 lg:py-16">
-          <Logo tone="ink" className="h-auto w-full max-w-2xl" />
+
+        <div className="measure relative py-16 lg:py-20">
+          {/* The compact cut, because the full lockup bakes "...providing your
+              convenient energy" in as microtype — and that line is now set
+              live, at display size, directly beneath it. */}
+          <Logo tone="ink" compact className="h-11 w-auto sm:h-12" />
+
+          <p className="mt-10 max-w-[16ch] font-display text-[clamp(2.5rem,7.2vw,6.5rem)] font-medium leading-[0.92] tracking-[-0.03em] sm:max-w-none">
+            Providing your{" "}
+            <span className="text-flame">convenient energy</span>.
+          </p>
+
+          <div className="rule-ticks mt-12" />
+
+          <div className="mt-6 flex flex-col gap-x-10 gap-y-3 text-[0.6875rem] uppercase tracking-[0.09em] text-fg-ink-muted sm:flex-row sm:flex-wrap">
+            <span>{SITE.legalName}</span>
+            <span>{SITE.rc}</span>
+            <span>{SITE.address.locality} · Wuse II</span>
+            <span>Since {SITE.founded}</span>
+          </div>
         </div>
       </div>
 
@@ -161,6 +186,9 @@ export function SiteFooter() {
           © {new Date().getFullYear()} Suez Gas Nigeria Limited · RC 1076785
         </span>
         <span className="flex flex-wrap items-center gap-x-5 gap-y-2">
+          <Link href="/privacy" className="link-slide hover:text-flame">
+            Privacy
+          </Link>
           <span>Abuja · Wuse II</span>
           <span className="flex items-center gap-2">
             <span className="h-1.5 w-1.5 animate-pulse rounded-full bg-flame" />

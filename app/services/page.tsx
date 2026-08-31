@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Burner, Contours } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
 import { PageHero, SectionHead } from "@/components/page-parts";
+import { BreadcrumbSchema } from "@/components/structured-data";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/services" },
   title: "Our services",
   description:
     "LPG supply, bulk haulage, storage planning, professional installation and gas consultancy across Abuja from Suez Gas Nigeria.",
@@ -76,6 +78,7 @@ const SERVICES = [
 export default function ServicesPage() {
   return (
     <>
+      <BreadcrumbSchema trail={[["Services", "/services"]]} />
       <PageHero
         eyebrow="What we do"
         lines={["One supply chain,", "four ways in."]}

@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Burner, Contours } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
 import { PageHero, SectionHead } from "@/components/page-parts";
+import { BreadcrumbSchema } from "@/components/structured-data";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/pricing" },
   title: "Pricing",
   description:
     "Cylinder, refill, bulk LPG and hardware pricing from Suez Gas Nigeria. LPG is a commodity, so the price on the day is confirmed before delivery moves.",
@@ -46,6 +48,7 @@ const PRODUCTS = [
 export default function PricingPage() {
   return (
     <>
+      <BreadcrumbSchema trail={[["Pricing", "/pricing"]]} />
       <PageHero
         eyebrow="Pricing"
         lines={["What it costs,", "before you order."]}

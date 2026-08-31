@@ -3,8 +3,10 @@ import Link from "next/link";
 import { Burner, Contours } from "@/components/texture";
 import { Reveal } from "@/components/reveal";
 import { PageHero, PullQuote, SectionHead, StatRow } from "@/components/page-parts";
+import { BreadcrumbSchema } from "@/components/structured-data";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/about" },
   title: "About us",
   description:
     "Suez Gas Nigeria Limited (RC 1076785) has supplied commercial, industrial and residential LPG from Wuse II, Abuja since 2012. Part of the Suez energy group.",
@@ -31,6 +33,7 @@ const GROUP = [
 export default function AboutPage() {
   return (
     <>
+      <BreadcrumbSchema trail={[["About", "/about"]]} />
       <PageHero
         eyebrow="RC 1076785 · Wuse II, Abuja"
         lines={["An independent", "energy supplier."]}

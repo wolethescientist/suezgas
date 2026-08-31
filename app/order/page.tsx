@@ -2,8 +2,11 @@ import type { Metadata } from "next";
 import { Burner, Contours } from "@/components/texture";
 import { Reveal, WipeWords } from "@/components/reveal";
 import { HeroCanvas, HeroTelemetry } from "@/components/hero-canvas";
+import { OrderForm } from "@/components/order-form";
+import { BreadcrumbSchema } from "@/components/structured-data";
 
 export const metadata: Metadata = {
+  alternates: { canonical: "/order" },
   title: "Order gas",
   description:
     "Request LPG delivery, a cylinder refill or bulk commercial supply in Abuja. A representative confirms the requirement, price and delivery window before anything moves.",
@@ -18,6 +21,7 @@ const STEPS = [
 export default function OrderPage() {
   return (
     <>
+      <BreadcrumbSchema trail={[["Order gas", "/order"]]} />
       <HeroCanvas
         stamp="SU-GAS / 07 · Dispatch"
         className="border-b border-bone-line pb-16 pt-36 sm:pt-44"
@@ -95,109 +99,7 @@ export default function OrderPage() {
               <h2 className="text-display-m" style={{ "--i": 0 } as React.CSSProperties}>
                 Gas request form
               </h2>
-              <form className="mt-10 space-y-8" style={{ "--i": 1 } as React.CSSProperties}>
-                <div className="grid gap-8 sm:grid-cols-2">
-                  <p className="field">
-                    <label htmlFor="o-name">Full name</label>
-                    <input id="o-name" name="name" type="text" autoComplete="name" required />
-                  </p>
-                  <p className="field">
-                    <label htmlFor="o-phone">Phone</label>
-                    <input
-                      id="o-phone"
-                      name="phone"
-                      type="tel"
-                      autoComplete="tel"
-                      placeholder="080 0000 0000"
-                      required
-                    />
-                  </p>
-                </div>
-
-                <p className="field">
-                  <label htmlFor="o-email">Email (optional)</label>
-                  <input id="o-email" name="email" type="email" autoComplete="email" />
-                </p>
-
-                <div className="grid gap-8 sm:grid-cols-2">
-                  <p className="field">
-                    <label htmlFor="o-type">What do you need?</label>
-                    <select id="o-type" name="type" defaultValue="refill">
-                      <option value="refill">Refill my cylinder</option>
-                      <option value="cylinder">New cylinder</option>
-                      <option value="bundle">Regulator + cylinder + gas bundle</option>
-                      <option value="regulator">Regulator only</option>
-                      <option value="bulk">Bulk / commercial volume</option>
-                    </select>
-                  </p>
-                  <p className="field">
-                    <label htmlFor="o-size">Cylinder size</label>
-                    <select id="o-size" name="size" defaultValue="12.5">
-                      <option value="3">3 kg</option>
-                      <option value="6">6 kg</option>
-                      <option value="12.5">12.5 kg</option>
-                      <option value="25">25 kg</option>
-                      <option value="50">50 kg</option>
-                      <option value="bulk">Bulk - I will describe below</option>
-                    </select>
-                  </p>
-                </div>
-
-                <p className="field">
-                  <label htmlFor="o-address">Delivery address</label>
-                  <input
-                    id="o-address"
-                    name="address"
-                    type="text"
-                    autoComplete="street-address"
-                    placeholder="Street, estate, district"
-                    required
-                  />
-                </p>
-
-                <p className="field">
-                  <label htmlFor="o-when">Preferred window</label>
-                  <select id="o-when" name="when" defaultValue="today">
-                    <option value="today">Today if possible</option>
-                    <option value="tomorrow">Tomorrow</option>
-                    <option value="morning">A morning this week</option>
-                    <option value="afternoon">An afternoon this week</option>
-                  </select>
-                </p>
-
-                <label className="flex cursor-pointer items-start gap-3 text-[0.9375rem]">
-                  <input
-                    type="checkbox"
-                    name="safety_check"
-                    className="mt-1 h-4 w-4 cursor-pointer accent-flame"
-                  />
-                  <span>
-                    Check my regulator, hose and connections while you are here
-                    <span className="mt-0.5 block text-[0.8125rem] text-fg-bone-muted">
-                      Free with any delivery
-                    </span>
-                  </span>
-                </label>
-
-                <p className="field">
-                  <label htmlFor="o-notes">Anything else?</label>
-                  <textarea
-                    id="o-notes"
-                    name="notes"
-                    placeholder="Gate code, landmark, volume details"
-                  />
-                </p>
-
-                {/* ponytail: presentation only — wire to your order endpoint,
-                    mailer or WhatsApp Business API when the backend exists. */}
-                <button type="submit" className="btn btn-flame w-full sm:w-auto">
-                  Submit request
-                </button>
-
-                <p className="text-[0.6875rem] uppercase tracking-[0.075em] text-fg-bone-muted">
-                  We will call to confirm. No payment is taken on this form.
-                </p>
-              </form>
+              <OrderForm />
             </Reveal>
 
             {/* Faster alternatives */}

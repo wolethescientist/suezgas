@@ -96,7 +96,11 @@ export function Reveal({
           io.disconnect(); // reveal once, never re-animate on scroll back
         }
       },
-      { threshold: 0.15, rootMargin: "0px 0px -8% 0px" },
+      // Fire as the section's leading edge approaches, not once a sixth of it
+      // is already on screen. A tall section under the old 0.15/-8% pair could
+      // fill the viewport while still fully transparent, which read as a blank
+      // screen on a fast scroll.
+      { threshold: 0, rootMargin: "0px 0px 12% 0px" },
     );
     io.observe(el);
     return () => io.disconnect();

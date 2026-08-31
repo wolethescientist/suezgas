@@ -6,6 +6,7 @@ import { NumberedRow, PullQuote, SectionHead, StatRow } from "@/components/page-
 import { HeroCanvas, HeroTelemetry } from "@/components/hero-canvas";
 import { LpgInfrastructure } from "@/components/lpg-infrastructure";
 import { SocialMediaSection } from "@/components/social-media";
+import { ProofStrip } from "@/components/photo";
 
 const SUPPLY_MODES = [
   "Cylinder distribution",
@@ -14,10 +15,19 @@ const SUPPLY_MODES = [
   "Plant installation",
 ];
 
+/**
+ * Every figure on this rail has to be something a customer could check. "Supply
+ * modes: 04" counted a list further down the same page, which is filler dressed
+ * as instrumentation — it is out.
+ *
+ * TODO(suez): three real numbers would beat all of these, and only the company
+ * has them: tonnes moved per month, sites currently on supply, and the average
+ * hours from order to delivery. Send them over and they replace the middle two.
+ */
 const HERO_TELEMETRY = [
   { label: "Supplying since", value: "2012" },
   { label: "Cylinder range", value: "3–50", unit: "kg" },
-  { label: "Supply modes", value: "04" },
+  { label: "Every delivery", value: "Weighed" },
   { label: "Dispatch", value: "Live", live: true },
 ];
 
@@ -179,6 +189,8 @@ export default function HomePage() {
         </Reveal>
       </section>
 
+      <ProofStrip />
+
       {/* ───────────────────────── Heritage (bone-2) ───────────────────────── */}
       <section className="relative overflow-hidden bg-bone-2 py-20 lg:py-28">
         <Contours origin={{ x: 106, y: 30 }} rings={20} opacity={0.5} />
@@ -194,9 +206,9 @@ export default function HomePage() {
               <StatRow
                 items={[
                   { label: "Supplying since", value: "2012" },
-                  { label: "Supply modes", value: "4" },
-                  { label: "Service base", value: "Abuja" },
-                  { label: "Scale on every van", value: "Digital" },
+                  { label: "Registered", value: "RC 1076785" },
+                  { label: "Service base", value: "Abuja · Wuse II" },
+                  { label: "Cylinder range", value: "3–50 kg" },
                 ]}
               />
             </div>
