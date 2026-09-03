@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Suez Gas Nigeria - LPG supply, storage and haulage",
     description:
-      "Bulk LPG supply, road tanker haulage, storage planning and plant installation for off-takers, hospitality, food production and industrial operations.",
+      "Bulk LPG supply, road tanker haulage, storage planning and plant installation — with the Suez SRG smart regulator and RMS remote monitoring for usage and telemetry.",
     type: "website",
     locale: "en_NG",
     siteName: SITE.name,
@@ -50,7 +50,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Suez Gas Nigeria - LPG supply, storage and haulage",
     description:
-      "Bulk LPG supply, road tanker haulage and storage planning across Nigeria since 2012.",
+      "Bulk LPG supply, haulage and storage planning — plus smart regulators and remote usage monitoring, across Nigeria since 2012.",
   },
   other: {
     "geo.region": "NG-FC",

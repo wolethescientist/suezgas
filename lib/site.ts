@@ -14,7 +14,7 @@ export const SITE = {
   founded: "2012",
   tagline: "Providing your convenient energy",
   description:
-    "Bulk commercial and industrial LPG supply in Nigeria since 2012. Road tanker haulage, storage planning, plant installation and consultancy from the Suez energy group.",
+    "Bulk commercial and industrial LPG supply in Nigeria since 2012 — road tanker haulage, storage planning and plant installation, plus the Suez SRG smart regulator and RMS remote monitoring for usage and telemetry.",
 
   phone: {
     e164: "+2348168003677",

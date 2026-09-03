@@ -109,8 +109,31 @@ export const PHOTOS: Photo[] = [
     credit: "Library photograph · Pexels",
   },
 
-  /* Nothing here is Suez Gas equipment yet. The README carries the shot list;
-     the highest-value one is a road tanker of theirs, working. */
+  {
+    id: "team",
+    file: "team.jpg",
+    width: 1200,
+    height: 1000,
+    alt: "Three Suez Gas crew in branded coveralls and gloves weighing a cylinder on a digital scale beside their delivery truck.",
+    caption:
+      "Our crew, weighing on the scale that travels with the truck. Nothing leaves on an estimate.",
+    meta: "Our people",
+  },
+  {
+    id: "srg",
+    file: "srg-regulator.jpg",
+    width: 1600,
+    height: 1447,
+    alt: "The Suez SRG smart gas regulator, an orange low-pressure regulator with a dial showing contents level and a leak-check indicator.",
+    caption:
+      "The dial reads contents at a glance and flags a leak before you smell one — the cheapest telemetry in the system.",
+    meta: "Suez SRG",
+  },
+
+  /* The SRG and crew shots above are Suez Gas's own — no credit line, and their
+     captions speak in the first person. The rest are library stand-ins; the
+     README carries the shot list, and the one still most worth taking is a
+     road tanker of theirs, working. */
 ];
 
 /** Only the entries that have a real file behind them. */

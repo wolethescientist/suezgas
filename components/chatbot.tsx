@@ -12,12 +12,18 @@ type ChatMessage = {
 
 const PRESET_QUESTIONS = [
   "How do I buy gas?",
+  "What is the SRG regulator?",
   "Do you supply commercial LPG?",
   "Can you plan storage for us?",
   "How do I stay safe?",
 ];
 
 const ANSWERS = [
+  {
+    matches: ["srg", "regulator", "rms", "monitor", "monitoring", "telemetry", "usage", "gauge", "smart"],
+    text: "Two things. The Suez SRG smart gas regulator has the gauge built in, so you can read the cylinder's contents and run a leak check off the same dial. RMS is our remote monitoring system for bulk vessels — level, consumption rate, a refill forecast and alerts, reported continuously.",
+    link: { href: "/#products", label: "See both products" },
+  },
   {
     matches: ["order", "refill", "buy", "app", "price", "cost", "how much", "delivery today", "purchase"],
     text: "Gas is bought in the SuezElectric app — it is where the current price, your saved address and delivery tracking live. This website no longer takes orders or publishes a rate card, because LPG prices move and the app always has today's.",

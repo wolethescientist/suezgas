@@ -8,12 +8,14 @@ import { LpgInfrastructure } from "@/components/lpg-infrastructure";
 import { SocialMediaSection } from "@/components/social-media";
 import { ProofStrip } from "@/components/photo";
 import { AppDownloadSection } from "@/components/app-download";
+import { AboutStrip } from "@/components/about-strip";
+import { ProductsSection } from "@/components/products";
 
 const SUPPLY_MODES = [
   "Bulk LPG supply",
   "Road tanker haulage",
   "Storage planning",
-  "Plant installation",
+  "Regulators & telemetry",
 ];
 
 /**
@@ -47,19 +49,19 @@ export default function HomePage() {
           <div className="grid gap-14 lg:grid-cols-[1.2fr_0.85fr] lg:items-center lg:gap-16">
             <div className="reveal hero-parallax">
               <div className="eyebrow" style={{ "--i": 0 } as React.CSSProperties}>
-                Bulk LPG infrastructure
+                Bulk LPG & monitoring
               </div>
               <h1 className="mt-7 text-display-l">
-                <WipeWords lines={["LPG at", "commercial scale."]} />
+                <WipeWords lines={["Energy at", "commercial scale."]} />
               </h1>
 
               <p
                 className="mt-9 max-w-lg text-body-l text-fg-bone-muted"
                 style={{ "--i": 3 } as React.CSSProperties}
               >
-                Bulk LPG supply, road tanker haulage and storage planning for
-                off-takers, plants, hospitality, food production and industrial
-                operations across Nigeria.
+                Bulk LPG supply, road tanker haulage and storage planning —
+                with the regulators and remote monitoring that tell you what you
+                are actually using, across Nigeria.
               </p>
 
               <div
@@ -107,6 +109,8 @@ export default function HomePage() {
 
       <GlobalGasTicker />
 
+      <AboutStrip />
+
       <AppDownloadSection />
 
       {/* ───────────────────────── Supply chain (ink) ───────────────────────── */}
@@ -142,6 +146,8 @@ export default function HomePage() {
           </Reveal>
         </Reveal>
       </section>
+
+      <ProductsSection />
 
       {/* ───────────────────────── Why us (bone) ───────────────────────── */}
       <section className="relative overflow-hidden border-b border-bone-line py-20 lg:py-28">

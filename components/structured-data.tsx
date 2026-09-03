@@ -109,6 +109,8 @@ export function LocalBusinessSchema() {
         makesOffer: [
           "Bulk LPG supply",
           "Bulk LPG haulage",
+          "Suez SRG smart gas regulator",
+          "RMS remote gas monitoring and telemetry",
           "LPG storage planning and installation",
         ].map((name) => ({
           "@type": "Offer",
